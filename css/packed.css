@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i');
+body {
+  background-color: #e0e0e0;
+  font: 14px Arial;
+  padding: 15px;
+}
+select, input {
+  font: 14px Arial;
+}
+h3 {
+  font-size: 16px;
+  margin: 15px 0 4px 0;
+  padding: 0;
+}
+.first-h3 {
+  margin-top: 0;
+}
+fieldset {
+  float: left;
+  padding: 15px;
+  margin: 0;
+  background-color: white;
+  border: 1px solid #bbb;
+}
+legend {
+  background-color: white;
+  padding: 3px 8px;
+  border: 1px solid #bbb;
+}
+#container {
+  width: 960px;  
+  margin: 0 auto;
+  background-color: #e0e0e0;
+}
+.bubble-label {
+  text-align: center;
+  font-family: Roboto, Arial;
+  font-weight: 400;
+  line-height: 1.2;
+  cursor: default;
+  user-select: none;
+}
+.bubble-value {
+  color: rgba(255,255,255,0.8);
+  font-weight: 300;
+  cursor: default;
+  user-select: none;
+}
+button {
+  clear: left;
+  float: left;
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 8px 15px;
+  background-color: white;
+  border: 1px solid #bbb;
+}
+
+
+text {
+  fill: #fff;
+  transition: all 0.3s;
+  text-overflow: ellipsis;
+}
+
+.label {
+  fill: #000;
+}
+
+.chart {
+  margin: 0 auto;
+  max-width: 675px;
+  max-height: 675px;
+}
+
+.chart-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.node {
+  cursor: default;
+  @for $i from 1 through 30 {
+    &:nth-child(#{$i}) .graph {
+      $delay: $i * 0.033s;
+      animation-delay: $delay;
+    }
+  }
+}
+.node circle {
+  transition: transform 200ms ease-in-out;
+}
+.node:hover circle {
+  transform: scale(1.05);
+}
+
+.graph {
+  opacity: 0;
+  animation-name: animateIn;
+  animation-duration: 900ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.7,.85,.41,1.21);
+}
+
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-8deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+
+.d3-tip-outer {
+  position: relative;
+}
+.d3-tip {
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  font-weight: 100;
+  line-height: 1;
+  padding: 16px 20px;
+  // background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 6px;
+}
+.d3-stem {
+  width: 0;
+	height: 0;
+	position: absolute;
+	bottom: -45px;
+	left: 55%;
+	border-style: solid;
+	border-width: 48px 15px 0 0;
+	transform: rotate(17deg);
+	transform-origin: 100% 0;
+	z-index: 2;
+}
+
+// /* Creates a small triangle extender for the tooltip */
+// .d3-tip:after {
+//   box-sizing: border-box;
+//   display: inline;
+//   font-size: 10px;
+//   width: 100%;
+//   line-height: 1;
+//   color: rgba(0, 0, 0, 0.8);
+//   content: "\25BC";
+//   position: absolute;
+//   text-align: center;
+// }
+
+// /* Style northward tooltips differently */
+// .d3-tip.n:after {
+//   margin: -1px 0 0 0;
+//   top: 100%;
+//   left: 0;
+// }
