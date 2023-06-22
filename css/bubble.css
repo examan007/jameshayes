@@ -14,6 +14,7 @@ body {
   background-color: #f2f2f2;
 }
 .centered-div {
+  margin: 50px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -31,8 +32,8 @@ svg {
 #chart g {
 }
 .bubble {
-    nowrap: false;
 }
 .label {
     font-size: 10px;
+;
 }
