@@ -1,39 +1,18 @@
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100%;
+  height: 100vh;
+  width: 100%;
+
 }
 #chart {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: #f2f2f2;
 }
 .centered-div {
-  margin: 50px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightgray;
   width: 100%;
 }
-svg {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f2f2f2;
-  height: 100vh;
-  width: 100%;
-}
-#chart g {
-}
-.bubble {
-}
-.label {
+text.label {
     font-size: 10px;
-;
 }

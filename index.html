@@ -1,47 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>James Hayes</title>
-    <meta name="description" content="Interactive resume..">
-    <style>
-        .diagram-container {
-          width: 400px;
-          height: 400px;
-        }
-        #node-diagram {
-          border: 1px solid #ccc;
-        }
-    </style>
-  </head>
-  <body>
-  <div class="diagram-container">
-    <svg id="node-diagram" width="400" height="400">
-      <!-- Add your nodes and connections here using SVG shapes and lines -->
-      <circle cx="100" cy="100" r="30" fill="red" />
-      <circle cx="200" cy="200" r="30" fill="blue" />
-      <line x1="100" y1="100" x2="200" y2="200" stroke="black" />
-    </svg>
-  </div>
-  <script>
-      const diagram = document.getElementById('node-diagram');
-      let rotationAngle = 0;
+<head>
+  <title>Interactive Resume</title>
+  <link rel="stylesheet" href="css/bubble.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 
-      function rotateDiagram() {
-        rotationAngle += 1; // Adjust the rotation speed as needed
-
-        // Apply rotation transformation to the SVG element
-        diagram.style.transform = `rotate(${rotationAngle}deg)`;
-
-        // Schedule the next rotation frame
-        requestAnimationFrame(rotateDiagram);
-      }
-
-      // Start the rotation animation
-      rotateDiagram();
-    </script>
-
-  </body>
+</head>
+<body>
+<div class="centered-div">
+<svg id="chart"></svg>
+</div>
+<script src="../neonow/js/login.js"></script>"
+<script src="js/bubble.js"></script>
+<script>
+  console.log("getData")
+  LogMgr = LoginManager().getData(
+    "data/resume.json",
+    (jsonData)=> {
+      const App = Application(jsonData).onload()
+    }
+  )
+  console.log("Done.")
+</script>
+</body>
 </html>
-
