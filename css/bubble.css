@@ -16,3 +16,6 @@ body {
 text.label {
     font-size: 10px;
 }
+svg g.x-axis g.tick text {
+    font-size: 2px !important;
+}
