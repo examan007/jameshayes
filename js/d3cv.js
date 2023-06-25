@@ -26,6 +26,7 @@ d3Application = function () {
             { title: "Project", filter: "Project" },
             { title: "Technology", filter: "Technology" },
             { title: "Role", filter: "Title"  },
+            { title: "Profile", filter: "Profile"}
             ]
 
         function mapContinents(static_countinents) {
@@ -53,9 +54,19 @@ d3Application = function () {
                     const filter_code = defaultmapvalues[index].filter
                     const numberofjobs = jsonData.experience.length
                     if (filter_code != null)
+                    if (filter_code === "Profile") {
+                        newarray.push({
+                            "CountryName":jsonData.name,
+                            "CountryCode":jsonData.email,
+                            "ContinentCode": continent_code,
+                            "CenterLongitude": 0,
+                            "CenterLatitude": 0,
+                            "Population": 100000
+                        })
+                    } else
                     for (let i = 0; i < numberofjobs; i++) {
-                        const bias  = 1000 / i + 2 ^ i // - i * 200
-                        const value = 1000 / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
+                        const bias  = 10000 // / i + 2 ^ i // - i * 200
+                        const value = 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
                         function getTechnology() {
                             return "test"
                         }
@@ -69,8 +80,8 @@ d3Application = function () {
                         function getObject() {
                             if (filter_code === "Company") {
                                 return {
-                                    "CountryName":jsonData.experience.company,
-                                    "CountryCode":jsonData.experience.company,
+                                    "CountryName":jsonData.experience[i].company,
+                                    "CountryCode":jsonData.experience[i].company,
                                     "ContinentCode": continent_code,
                                     "CenterLongitude": getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -79,8 +90,8 @@ d3Application = function () {
                             } else
                             if (filter_code === "Title") {
                                 return {
-                                    "CountryName":jsonData.experience.title,
-                                    "CountryCode":jsonData.experience.company,
+                                    "CountryName":jsonData.experience[i].title,
+                                    "CountryCode":jsonData.experience[i].company,
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -90,7 +101,7 @@ d3Application = function () {
                             if (filter_code === "Technology") {
                                 return {
                                     "CountryName":getTechnology(),
-                                    "CountryCode":jsonData.experience.company,
+                                    "CountryCode":jsonData.experience[i].company,
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -100,7 +111,7 @@ d3Application = function () {
                             if (filter_code === "Date") {
                                 return {
                                     "CountryName":getTechnology(),
-                                    "CountryCode":jsonData.experience.company,
+                                    "CountryCode":jsonData.experience[i].company,
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -110,7 +121,7 @@ d3Application = function () {
                             if (filter_code === "Responsibility") {
                                 return {
                                     "CountryName":getTechnology(),
-                                    "CountryCode":jsonData.experience.company,
+                                    "CountryCode":jsonData.experience[i].company,
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -118,8 +129,8 @@ d3Application = function () {
                                 }
                             } else {
                                 return {
-                                    "CountryName":jsonData.experience.title,
-                                    "CountryCode":jsonData.experience.company,
+                                    "CountryName":jsonData.experience[i].title,
+                                    "CountryCode":jsonData.experience[i].company,
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -149,8 +160,10 @@ d3Application = function () {
             createBubbleChart(error, countries_map, continents_map)
             console.log("Done.")
         })
-    }
-  )
+
+function changeRadius(newRadius) {
+  circle.attr("r", newRadius);
+}    })
   return {
     status: 0
   }
