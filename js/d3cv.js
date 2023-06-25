@@ -1,8 +1,9 @@
 d3Application = function () {
-    var console = {
+    var consolex = {
         log: function(msg) {},
         error: function(msg) {},
     }
+
   console.log("getData")
   LogMgr = LoginManager().getData(
     "data/resume.json",
@@ -23,10 +24,10 @@ d3Application = function () {
             return defaults
         }
         const defaultmapvalues = [
+            { title: "Profile", filter: "Profile"},
             { title: "Project", filter: "Project" },
             { title: "Technology", filter: "Technology" },
-            { title: "Role", filter: "Title"  },
-            { title: "Profile", filter: "Profile"}
+            { title: "Role", filter: "Title"  }
             ]
 
         function mapContinents(static_countinents) {
@@ -65,8 +66,15 @@ d3Application = function () {
                         })
                     } else
                     for (let i = 0; i < numberofjobs; i++) {
-                        const bias  = 10000 // / i + 2 ^ i // - i * 200
-                        const value = 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
+                        function getPopulationValue () {
+                            if (newarray.length > 16) {
+                                return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
+                            } else {
+                                return 20000
+                            }
+                        }
+                        const bias  = getPopulationValue()
+                        const value = getPopulationValue()
                         function getTechnology() {
                             return "test"
                         }
@@ -150,6 +158,67 @@ d3Application = function () {
             }
             return mapCountriesByContinents(static_countries, 0)
         }
+
+        function getWindowDimensions() {
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+          return {
+            width: width,
+            height: height,
+          };
+        }
+
+        function initializeResizing(d3module) {
+            // Select the SVG container element
+            const svgContainer = d3.select("svg");
+
+            // Define the initial dimensions of the SVG
+            let svgWidth = getWindowDimensions().width //svgContainer.node().getBoundingClientRect().width;
+            let svgHeight = getWindowDimensions().height //svgContainer.node().getBoundingClientRect().height;
+
+            // Create a function to update the SVG dimensions
+            function scaleSizing() {
+                const newWidth = window.innerWidth;
+                const newHeight = window.innerHeight;
+
+                // Calculate the scaling factors
+                const scaleX = newWidth / svgWidth
+                const scaleY = newHeight / svgHeight
+                const scale = 2 //Math.min(scaleX, scaleY);
+
+                console.log("scaling: scaleX=[" + scaleX + "] scaleY=[" + scaleY + "] scale=[" + scale + "]")
+
+                if (scale != 1) {
+                      svgWidth = newWidth;
+                      svgHeight = newHeight;
+                 }
+
+                // Apply the scaling transformation to the diagram
+                d3.select("svg")
+                  .attr("transform", `scale(${scale})`);
+            }
+            function updateSVGDimensions() {
+              // Get the new window size
+              const newWidth = window.innerWidth;
+              const newHeight = window.innerHeight;
+
+             //scaleSizing()
+
+                console.log("resize: width=[" + svgWidth + "] height=[" + svgHeight + "]")
+
+              // Update the SVG attributes
+              svgContainer.attr("width", svgWidth)
+                          .attr("height", svgHeight);
+
+                d3module.updateCircles()
+            }
+
+            // Attach an event listener to the window resize event
+            window.addEventListener("resize", updateSVGDimensions);
+
+            // Call the function initially to set the SVG dimensions
+            updateSVGDimensions();
+      }
       d3.queue()
         .defer(d3.csv, "../d3-country-bubble-chart/countries.csv")
         .defer(d3.json, "../d3-country-bubble-chart/continent-names.json")
@@ -157,13 +226,11 @@ d3Application = function () {
             console.log(JSON.stringify(countries[0]))
             const continents_map = mapContinents(continents)
             const countries_map = mapCountries(continents_map, countries)
-            createBubbleChart(error, countries_map, continents_map)
+            const d3module = createBubbleChart(error, countries_map, continents_map)
             console.log("Done.")
+            initializeResizing(d3module)
         })
-
-function changeRadius(newRadius) {
-  circle.attr("r", newRadius);
-}    })
+    })
   return {
     status: 0
   }
