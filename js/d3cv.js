@@ -67,10 +67,10 @@ d3Application = function () {
                     } else
                     for (let i = 0; i < numberofjobs; i++) {
                         function getPopulationValue () {
-                            if (newarray.length > 16) {
+                            if (i  > 2) {
                                 return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
                             } else {
-                                return 20000
+                                return 33000
                             }
                         }
                         const bias  = getPopulationValue()
@@ -228,7 +228,10 @@ d3Application = function () {
             const countries_map = mapCountries(continents_map, countries)
             const d3module = createBubbleChart(error, countries_map, continents_map)
             console.log("Done.")
-            initializeResizing(d3module)
+                            d3.select("svg")
+                              .attr("transform", `scale(1)`);
+
+//            initializeResizing(d3module)
         })
     })
   return {
