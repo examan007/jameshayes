@@ -1,5 +1,5 @@
 d3Application = function () {
-    var consolex = {
+    var console = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -67,7 +67,7 @@ d3Application = function () {
                     } else
                     for (let i = 0; i < numberofjobs; i++) {
                         function getPopulationValue () {
-                            if (filter_code  === "Title" && i < 12) {
+                            if (filter_code  === "Title" && i < 8) {
                                 return 33000
                             } else {
                                 return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
@@ -89,7 +89,7 @@ d3Application = function () {
                             if (filter_code === "Company") {
                                 return {
                                     "CountryName":jsonData.experience[i].company,
-                                    "CountryCode":jsonData.experience[i].company,
+                                    "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude": getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -99,7 +99,7 @@ d3Application = function () {
                             if (filter_code === "Title") {
                                 return {
                                     "CountryName":jsonData.experience[i].title,
-                                    "CountryCode":jsonData.experience[i].company,
+                                    "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -109,7 +109,7 @@ d3Application = function () {
                             if (filter_code === "Technology") {
                                 return {
                                     "CountryName":getTechnology(),
-                                    "CountryCode":jsonData.experience[i].company,
+                                    "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -119,7 +119,7 @@ d3Application = function () {
                             if (filter_code === "Date") {
                                 return {
                                     "CountryName":getTechnology(),
-                                    "CountryCode":jsonData.experience[i].company,
+                                    "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -129,7 +129,7 @@ d3Application = function () {
                             if (filter_code === "Responsibility") {
                                 return {
                                     "CountryName":getTechnology(),
-                                    "CountryCode":jsonData.experience[i].company,
+                                    "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),
@@ -138,7 +138,7 @@ d3Application = function () {
                             } else {
                                 return {
                                     "CountryName":jsonData.experience[i].title,
-                                    "CountryCode":jsonData.experience[i].company,
+                                    "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
                                     "CenterLatitude": getLatitude(index),

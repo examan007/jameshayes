@@ -1,4 +1,8 @@
 function createBubbleChart(error, countries, continentNames) {
+    var console = {
+        log: function(msg) {},
+        error: function(msg) {},
+    }
   var populations = countries.map(function(country) { return +country.Population; });
   var meanPopulation = d3.mean(populations),
       populationExtent = d3.extent(populations),
@@ -138,17 +142,28 @@ function createBubbleChart(error, countries, continentNames) {
   function minimizeAllCircles() {
         svg.selectAll("circle")
         .attr("r", function (d) {
-            console.log(JSON.stringify(d))
+            //console.log(JSON.stringify(d))
             d.Population = 10000
             return circleSize.min
         })
         createForceSimulation()
         updateCircles()
   }
+  function getAllCountryCodeObjects(code) {
+
+  }
   function processClickCircle(d, clickedCircle) {
         const curradius = Number(clickedCircle.attr("r"))
         minimizeAllCircles()
         function getNewRadius(newradius) {
+            function maximize() {
+                 d.x = (getWindowDimensions().width / 2) // - (getCircleSizes().max / 2)
+                 d.y = (getWindowDimensions().height / 2) // - (getCircleSizes().max / 2)
+                 return {
+                    radius: circleSize.max,
+                    population: 100000
+                 }
+            }
             if (curradius == circleSize.max) {
                 return {
                     radius: circleSize.min,
@@ -162,22 +177,13 @@ function createBubbleChart(error, countries, continentNames) {
                 }
             } else
             if (curradius == circleSize.med) {
-                 return {
-                    radius: circleSize.max,
-                    population: 100000
-                 }
+                return maximize()
             } else
             if (newradius > circleSize.max) {
-                return {
-                    radius: circleSize.max,
-                    population: 100000
-                }
+                return maximize()
             } else {
                 console.log("Current radius [" + curradius + "]")
-                return {
-                    radius: circleSize.max,
-                    population: 100000
-                }
+                return maximize()
             }
         }
         const newradius = getNewRadius(curradius + circleSize.max / 20)
@@ -220,7 +226,7 @@ function createBubbleChart(error, countries, continentNames) {
                 .attr("class", "label")
                 .text(function (d) {
                     const text = d.CountryName.split(/ |\//)[index]
-                   console.log("CountryName=[" + text + "] index=[" + index + "]")
+                   //console.log("CountryName=[" + text + "] index=[" + index + "]")
                    if (typeof(text) === 'undefined') {
                         return ""
                     } else {
@@ -251,18 +257,18 @@ function createBubbleChart(error, countries, continentNames) {
     svg.selectAll(".neod3group").each(function () {
       const group = d3.select(this)
       const circle = group.select("circle").attr("fill", function(d) {
-        console.log(JSON.stringify(this))
+        //console.log(JSON.stringify(this))
         return flagFill() ? "url(#" + d.CountryCode + ")" : continentColorScale(d.ContinentCode);
       })
       const r = +circle.attr("r")
       const x = +circle.attr("cx");
       const y = +circle.attr("cy");
-      console.log("x:", x);
-      console.log("y:", y);
-      console.log("r:", r);
-      console.log("r:", getCircleSizes().med);
+      //console.log("x:", x);
+      //console.log("y:", y);
+      //console.log("r:", r);
+      //console.log("r:", getCircleSizes().med);
       group.selectAll("text").each(function (element, i) {
-         console.log("element=[" + JSON.stringify(element) + "]")
+//         console.log("element=[" + JSON.stringify(element) + "]")
          const text = d3.select(this)
          if (r == getCircleSizes().max) {
             function getMaxFontSize() {
