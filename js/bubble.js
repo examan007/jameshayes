@@ -49,7 +49,7 @@ const Application = function (jsondata) {
     }
   }
   const jsonData = getJsonData()
-  // Set up the SVG container
+    // Set up the SVG container
   const svg = d3.select('#chart');
   const width = +svg.attr('width');
   const height = +svg.attr('height');

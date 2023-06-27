@@ -25,9 +25,9 @@ d3Application = function () {
         }
         const defaultmapvalues = [
             { title: "Profile", filter: "Profile"},
+            { title: "Role", filter: "Title"  },
             { title: "Project", filter: "Project" },
             { title: "Technology", filter: "Technology" },
-            { title: "Role", filter: "Title"  }
             ]
 
         function mapContinents(static_countinents) {
@@ -67,10 +67,10 @@ d3Application = function () {
                     } else
                     for (let i = 0; i < numberofjobs; i++) {
                         function getPopulationValue () {
-                            if (i  > 2) {
-                                return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
-                            } else {
+                            if (filter_code  === "Title" && i < 12) {
                                 return 33000
+                            } else {
+                                return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
                             }
                         }
                         const bias  = getPopulationValue()
@@ -220,8 +220,8 @@ d3Application = function () {
             updateSVGDimensions();
       }
       d3.queue()
-        .defer(d3.csv, "../d3-country-bubble-chart/countries.csv")
-        .defer(d3.json, "../d3-country-bubble-chart/continent-names.json")
+        .defer(d3.csv, "data/countries.csv")
+        .defer(d3.json, "data/continent-names.json")
         .await((error, countries, continents)=> {
             console.log(JSON.stringify(countries[0]))
             const continents_map = mapContinents(continents)

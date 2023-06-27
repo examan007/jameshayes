@@ -16,16 +16,6 @@
       ]
     },
     {
-      "company": "LaserStyle.me",
-      "location": "Hamilton, ON",
-      "title": "Freelance Developer",
-      "dates": "Apr’23-Jul'23",
-      "responsibilities": [
-        "Application of full stack technology supporting web services including appointment booking using MongoDB, node.js, express.js, Nginx, Docker CE, GitHub Pages, HTML, CSS, and Javascript. JWT with nodemail.js verification.",
-        "Utilizing various public CDN resources, open-source components, and a low-cost high availability architecture."
-      ]
-    },
-    {
       "company": "Datapassports",
       "location": "Toronto, ON",
       "title": "Lead, Devops Engineering",
@@ -70,7 +60,7 @@
     {
       "company": "Telus",
       "location": "Scarborough, ON",
-      "title": "Web Developer\nData Analyst",
+      "title": "Web Developer/Data Analyst",
       "dates": "Oct’16-May'17",
       "responsibilities": [
         "Develop web applications to consolidate and replace existing engineering tools running on desktops.",
@@ -82,7 +72,7 @@
     {
       "company": "ComQi",
       "location": "Burlington, ON",
-      "title": "Java Developer/ Data Analyst",
+      "title": "Java Developer/Data Analyst",
       "dates": "Jun’16-Aug'16",
       "responsibilities": [
         "A commercial HTML5 application with AngularJS and designed for automobile retail required automated processes to be developed supporting the model concern with respect to MVC architectural pattern.",
