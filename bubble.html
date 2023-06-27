@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Resume</title>
+  <link rel="stylesheet" href="css/bubble.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+</head>
+<body>
+<div class="centered-div">
+<svg id="chart"></svg>
+</div>
+<script src="https://neonow.neolation.com/js/login.js"></script>"
+<script src="js/bubble.js"></script>
+<script>
+  console.log("getData")
+  LogMgr = LoginManager().getData(
+    "data/resume.json",
+    (jsonData)=> {
+      const App = Application(jsonData).onload()
+    }
+  )
+  console.log("Done.")
+</script>
+</body>
+</html>
