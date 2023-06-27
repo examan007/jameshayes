@@ -1,5 +1,5 @@
 function createBubbleChart(error, countries, continentNames) {
-    var console = {
+    var consolex = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -149,26 +149,53 @@ function createBubbleChart(error, countries, continentNames) {
         createForceSimulation()
         updateCircles()
   }
-  function getAllCountryCodeObjects(code) {
-
-  }
-  function processClickCircle(d, clickedCircle) {
+  function processClickCircle(data, clickedCircle) {
         const curradius = Number(clickedCircle.attr("r"))
         minimizeAllCircles()
         function getNewRadius(newradius) {
+           function getAllCountryCodeObjects(code) {
+                var rolecount = 0
+                svg.selectAll("circle")
+                .attr("r", function (d) {
+                   function setRadius(radius) {
+                        if (radius == getCircleSizes().med) {
+                            d.Population = 33000
+                            return getCircleSizes().med
+                        } else
+                        if (radius == getCircleSizes().max) {
+                            d.population = 100000
+                            return circleSize.max
+                        } else {
+                           d.Population = 10000
+                           return getCircleSizes().min
+                        }
+                   }
+                    if (data.ContinentCode === "AF") {
+                        if (d.ContinentCode === "AS" && rolecount < 8) {
+                            rolecount += 1
+                            return setRadius(getCircleSizes().med)
+                        } else {
+                            return setRadius(getCircleSizes().min)
+                        }
+                    } else
+                    if (d.CountryCode === code || d.ContinentCode === "AF") {
+                            return setRadius(getCircleSizes().med)
+                    } else {
+                            return setRadius(getCircleSizes().min)
+                    }
+                })
+            }
             function maximize() {
-                 d.x = (getWindowDimensions().width / 2) // - (getCircleSizes().max / 2)
-                 d.y = (getWindowDimensions().height / 2) // - (getCircleSizes().max / 2)
+                 data.x = (getWindowDimensions().width / 2) // - (getCircleSizes().max / 2)
+                 data.y = (getWindowDimensions().height / 2) // - (getCircleSizes().max / 2)
+                 getAllCountryCodeObjects(data.CountryCode)
                  return {
                     radius: circleSize.max,
                     population: 100000
                  }
             }
             if (curradius == circleSize.max) {
-                return {
-                    radius: circleSize.min,
-                    population: 10000
-                }
+                return maximize ()
             } else
             if (curradius == circleSize.min) {
                 return {
@@ -188,8 +215,8 @@ function createBubbleChart(error, countries, continentNames) {
         }
         const newradius = getNewRadius(curradius + circleSize.max / 20)
         clickedCircle.attr("r", newradius.radius.toString())
-        console.log(JSON.stringify(d))
-        d.Population = newradius.population
+        console.log(JSON.stringify(data))
+        data.Population = newradius.population
         createForceSimulation()
         updateCircles()
     }
