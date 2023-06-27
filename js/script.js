@@ -149,6 +149,7 @@ function createBubbleChart(error, countries, continentNames) {
         createForceSimulation()
         updateCircles()
   }
+  var MaxRollCount = 8
   function processClickCircle(data, clickedCircle) {
         const curradius = Number(clickedCircle.attr("r"))
         minimizeAllCircles()
@@ -171,7 +172,7 @@ function createBubbleChart(error, countries, continentNames) {
                         }
                    }
                     if (data.ContinentCode === "AF") {
-                        if (d.ContinentCode === "AS" && rolecount < 8) {
+                        if (d.ContinentCode === "AS" && rolecount < MaxRollCount) {
                             rolecount += 1
                             return setRadius(getCircleSizes().med)
                         } else {
@@ -194,21 +195,20 @@ function createBubbleChart(error, countries, continentNames) {
                     population: 100000
                  }
             }
-            if (curradius == circleSize.max) {
+            if (curradius >= circleSize.max) {
+                if (MaxRollCount == 16) {
+                    MaxRollCount = 8
+                } else {
+                    MaxRollCount = 16
+                }
                 return maximize ()
             } else
             if (curradius == circleSize.min) {
-                return {
-                    radius: circleSize.med,
-                    population: 33000
-                }
+                 return maximize ()
             } else
             if (curradius == circleSize.med) {
                 return maximize()
-            } else
-            if (newradius > circleSize.max) {
-                return maximize()
-            } else {
+             } else {
                 console.log("Current radius [" + curradius + "]")
                 return maximize()
             }
@@ -280,7 +280,7 @@ function createBubbleChart(error, countries, continentNames) {
       }
     }
 
-  function updateCirclesReal(display) {
+  function updateCirclesReal(display, index) {
     svg.selectAll(".neod3group").each(function () {
       const group = d3.select(this)
       const circle = group.select("circle").attr("fill", function(d) {
@@ -319,13 +319,15 @@ function createBubbleChart(error, countries, continentNames) {
             .style("display", display)
             .style("font-family", "Copperplate Gothic, sans-serif")
             .style("color", "white")
-            updateCountryInfo(element)
+            if (index < 5) {
+                updateCountryInfo(element)
+            }
          } else
          if (r > getCircleSizes().min) {
             const fontsize = getCircleSizes().med / 4
             text.style("font-size", fontsize.toString() + "px")
             .attr("x", x - getCircleSizes().med / 2)
-            .attr("y", y + (i - 1) * fontsize)
+            .attr("y", y + (i - 1.5) * fontsize)
             .style("display", display)
          } else {
             text
@@ -340,7 +342,7 @@ function createBubbleChart(error, countries, continentNames) {
     function adjustText(index) {
         if (index < 50) {
             window.setTimeout((()=> {
-                updateCirclesReal("block")
+                updateCirclesReal("block", index)
                 adjustText(index + 1)
             }), 100)
         }
