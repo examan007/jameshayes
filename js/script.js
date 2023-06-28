@@ -398,7 +398,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
     }
     updateCirclesReal("none")
     function adjustText(index) {
-        if (index < 75) {
+        if (index < 100) {
             timerhandle = window.setTimeout((()=> {
                 updateCirclesReal("block", index)
                 adjustText(index + 1)
