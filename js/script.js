@@ -389,11 +389,17 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
     })
   }
 
+  var timerhandle = null
   function updateCircles() {
+    try {
+        window.clearTimeout(timerhandle)
+    } catch (e) {
+        console.log(e.stack.toString())
+    }
     updateCirclesReal("none")
     function adjustText(index) {
-        if (index < 50) {
-            window.setTimeout((()=> {
+        if (index < 75) {
+            timerhandle = window.setTimeout((()=> {
                 updateCirclesReal("block", index)
                 adjustText(index + 1)
             }), 100)
