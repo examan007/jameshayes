@@ -1,5 +1,5 @@
-function createBubbleChart(error, countries, continentNames) {
-    var consolex = {
+function createBubbleChart(error, countries, continentNames, technology) {
+    var console = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -25,12 +25,12 @@ function createBubbleChart(error, countries, continentNames) {
       height = getWindowDimensions().height - 100;
     function getCircleSizes() {
         if (height < 600) {
-            return { min: 10, med: 25, max: 50 }
+            return { min: 5, med: 25, max: 50 }
         } else
         if (height < 800) {
-            return { min: 20, med: 50, max: 100 };
+            return { min: 10, med: 50, max: 100 };
         } else {
-            return { min: 30, med: 75, max: 133 };
+            return { min: 15, med: 75, max: 133 };
         }
     }
 
@@ -160,11 +160,11 @@ function createBubbleChart(error, countries, continentNames) {
                 .attr("r", function (d) {
                    function setRadius(radius) {
                         if (radius == getCircleSizes().med) {
-                            d.Population = 33000
+                            d.Population = 37000
                             return getCircleSizes().med
                         } else
                         if (radius == getCircleSizes().max) {
-                            d.population = 100000
+                            d.population =100000
                             return circleSize.max
                         } else {
                            d.Population = 10000
@@ -492,7 +492,11 @@ function createBubbleChart(error, countries, continentNames) {
           // slice: scale the image to fill the circle
           .attr("preserveAspectRatio", "xMidYMid slice")
           .attr("xlink:href", function(d) {
-            return "flags/" + d.CountryCode + ".svg";
+            if (d.ContinentCode == "NA") {
+                return "flags/defaulttech.svg"
+            } else {
+               return "flags/" + d.CountryCode + ".svg";
+            }
           });
   }
 

@@ -1,5 +1,5 @@
 d3Application = function () {
-    var console = {
+    var consolex = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -42,7 +42,7 @@ d3Application = function () {
           }
           return null; // Return null if the value is not found in the object
         }
-        function mapCountries(continents_map, static_countries) {
+        function mapCountries(continents_map, static_countries, technology) {
             const newarray = []
             function mapCountriesByContinents(static_countries, index) {
                 try {
@@ -65,10 +65,27 @@ d3Application = function () {
                             "Population": 100000
                         })
                     } else
+                    if (filter_code === "Technology") {
+                        function addTech(index) {
+                            const tech = technology[index]
+                            if (typeof(tech) !== 'undefined') {
+                                newarray.push({
+                                    "CountryName": tech,
+                                    "CountryCode": tech,
+                                    "ContinentCode": continent_code,
+                                    "CenterLongitude": 0,
+                                    "CenterLatitude":  0,
+                                    "Population": 10000
+                                })
+                                addTech(index + 1)
+                            }
+                        }
+                        addTech(0)
+                    } else
                     for (let i = 0; i < numberofjobs; i++) {
                         function getPopulationValue () {
                             if (filter_code  === "Title" && i < 8) {
-                                return 33000
+                                return 37000
                             } else {
                                 return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
                             }
@@ -76,7 +93,7 @@ d3Application = function () {
                         const bias  = getPopulationValue()
                         const value = getPopulationValue()
                         function getTechnology() {
-                            return "test"
+                            return [ "Java", "C/C++", "Scala", "Javascript"]
                         }
                         function getDegrees(ix) {
                             return ((360 / numberofjobs) * ix - 180).toString()
@@ -85,7 +102,7 @@ d3Application = function () {
                             const degrees = Number(getDegrees(ix))
                             return (degrees + 180 - 100) / 2 + ix * 50
                         }
-                        function getObject() {
+                        function getObject(object) {
                             if (filter_code === "Company") {
                                 return {
                                     "CountryName":jsonData.experience[i].company,
@@ -106,19 +123,9 @@ d3Application = function () {
                                     "Population": value.toString()
                                 }
                             } else
-                            if (filter_code === "Technology") {
-                                return {
-                                    "CountryName":getTechnology(),
-                                    "CountryCode":i.toString(),
-                                    "ContinentCode": continent_code,
-                                    "CenterLongitude":getDegrees(i),
-                                    "CenterLatitude": getLatitude(index),
-                                    "Population": bias
-                                }
-                            } else
                             if (filter_code === "Date") {
                                 return {
-                                    "CountryName":getTechnology(),
+                                    "CountryName":object.name,
                                     "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
@@ -128,7 +135,7 @@ d3Application = function () {
                             } else
                             if (filter_code === "Responsibility") {
                                 return {
-                                    "CountryName":getTechnology(),
+                                    "CountryName": object.name,
                                     "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
@@ -137,7 +144,7 @@ d3Application = function () {
                                 }
                             } else {
                                 return {
-                                    "CountryName":jsonData.experience[i].title,
+                                    "CountryName": "unknown",
                                     "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude":getDegrees(i),
@@ -146,9 +153,12 @@ d3Application = function () {
                                 }
                             }
                         }
-                        const newobject = getObject()
-                        console.log("newobject=[" + JSON.stringify(newobject) + "]")
-                        newarray.push(newobject)
+                        function createNewObject() {
+                            const newobject = getObject()
+                            console.log("newobject=[" + JSON.stringify(newobject) + "]")
+                            newarray.push(newobject)
+                        }
+                        createNewObject()
                     }
                     return mapCountriesByContinents(static_countries, index + 1)
                 } catch (e) {
@@ -222,11 +232,12 @@ d3Application = function () {
       d3.queue()
         .defer(d3.csv, "data/countries.csv")
         .defer(d3.json, "data/continent-names.json")
-        .await((error, countries, continents)=> {
+        .defer(d3.json, "data/technology.json")
+        .await((error, countries, continents, technology)=> {
             console.log(JSON.stringify(countries[0]))
             const continents_map = mapContinents(continents)
-            const countries_map = mapCountries(continents_map, countries)
-            const d3module = createBubbleChart(error, countries_map, continents_map)
+            const countries_map = mapCountries(continents_map, countries, technology)
+            const d3module = createBubbleChart(error, countries_map, continents_map, technology)
             console.log("Done.")
                             d3.select("svg")
                               .attr("transform", `scale(1)`);
