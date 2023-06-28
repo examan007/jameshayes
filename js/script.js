@@ -25,12 +25,12 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
       height = getWindowDimensions().height - 100;
     function getCircleSizes() {
         if (height < 600) {
-            return { min: 5, med: 25, max: 50 }
+            return { min: 0, med: 25, max: 50 }
         } else
         if (height < 800) {
-            return { min: 10, med: 50, max: 100 };
+            return { min: 0, med: 50, max: 100 };
         } else {
-            return { min: 15, med: 75, max: 133 };
+            return { min: 0, med: 75, max: 133 };
         }
     }
 
@@ -152,7 +152,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
   }
     function setRadius(radius, data) {
         if (radius == getCircleSizes().med) {
-            data.Population = 37000
+            data.Population = 42000
             return getCircleSizes().med
         } else
         if (radius == getCircleSizes().max) {
@@ -163,7 +163,9 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
            return getCircleSizes().min
         }
     }
-  var MaxRollCount = 8
+  const DefaultMinRollCount = 10
+  const DefualtMaRollCount = 24
+  var MaxRollCount = DefaultMinRollCount
   function processClickCircle(data, clickedCircle) {
         const curradius = Number(clickedCircle.attr("r"))
         minimizeAllCircles()
@@ -201,10 +203,10 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
                  }
             }
             if (curradius >= circleSize.max) {
-                if (MaxRollCount == 16) {
-                    MaxRollCount = 8
+                if (MaxRollCount == DefualtMaRollCount) {
+                    MaxRollCount = DefaultMinRollCount
                 } else {
-                    MaxRollCount = 16
+                    MaxRollCount = DefualtMaRollCount
                 }
                 return maximize ()
             } else
