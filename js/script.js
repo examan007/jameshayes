@@ -22,18 +22,30 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
       };
     }
   var width = getWindowDimensions().width,
-      height = getWindowDimensions().height - 100;
+      height = getWindowDimensions().height - 50;
     function getCircleSizes() {
-        if (height < 600) {
-            return { min: 0, med: 25, max: 50 }
+        if (width < 550 || height < 750) {
+            return { min: 0, med: 30, max: 50 }
         } else
-        if (height < 800) {
-            return { min: 0, med: 50, max: 100 };
+        if (width <  800 || height < 1200) {
+            return { min: 0, med: 56, max: 100 };
         } else {
-            return { min: 0, med: 75, max: 133 };
+            return { min: 0, med: 68, max: 120 };
         }
     }
-
+    function setRadius(radius, data) {
+        if (radius == getCircleSizes().med) {
+            data.Population = 50000
+            return getCircleSizes().med
+        } else
+        if (radius == getCircleSizes().max) {
+            data.population =100000
+            return circleSize.max
+        } else {
+           data.Population = 10000
+           return getCircleSizes().min
+        }
+    }
   var svg,
       circleSize = getCircleSizes()
 //      circleSize = { min: 10, med: 25, max: 50 };
@@ -66,7 +78,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
         if (width > 500) {
             return 500
         }
-        return width
+        return width - 50
     }
     var keyElementWidth = getKeyWidth() / continents.values().length,
         keyElementHeight = keyElementWidth / 5;
@@ -150,21 +162,9 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
         createForceSimulation()
         updateCircles()
   }
-    function setRadius(radius, data) {
-        if (radius == getCircleSizes().med) {
-            data.Population = 42000
-            return getCircleSizes().med
-        } else
-        if (radius == getCircleSizes().max) {
-            data.population =100000
-            return circleSize.max
-        } else {
-           data.Population = 10000
-           return getCircleSizes().min
-        }
-    }
-  const DefaultMinRollCount = 10
-  const DefualtMaRollCount = 24
+
+  const DefaultMinRollCount = 9
+  const DefaultMaxRollCount = 24
   var MaxRollCount = DefaultMinRollCount
   function processClickCircle(data, clickedCircle) {
         const curradius = Number(clickedCircle.attr("r"))
@@ -181,7 +181,9 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
                             element.style("visibility", "visible")
                             return setRadius(getCircleSizes().med, d)
                         } else {
-                            return setRadius(getCircleSizes().min, d)
+                            element.style("visibility", "hidden")
+                            element.style("display", "none")
+                           return setRadius(getCircleSizes().min, d)
                         }
                     } else
                     if (d.CountryCode === code || d.ContinentCode === "AF") {
@@ -203,10 +205,10 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
                  }
             }
             if (curradius >= circleSize.max) {
-                if (MaxRollCount == DefualtMaRollCount) {
+                if (MaxRollCount == DefaultMaxRollCount) {
                     MaxRollCount = DefaultMinRollCount
                 } else {
-                    MaxRollCount = DefualtMaRollCount
+                    MaxRollCount = DefaultMaxRollCount
                 }
                 return maximize ()
             } else
@@ -318,7 +320,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
       var info = "";
       if (country) {
         //info = [country.CountryName, formatPopulation(country.Population)].join(": ");
-        info = country.CountryName
+        info = country.CountryName + ":" + JSON.stringify(getWindowDimensions())
           d3.select("#country-info").html(info);
       }
     }

@@ -85,7 +85,7 @@ d3Application = function () {
                     for (let i = 0; i < numberofjobs; i++) {
                         function getPopulationValue () {
                             if (filter_code  === "Title" && i < 10) {
-                                return 40000
+                                return 50000
                             } else {
                                 return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
                             }
