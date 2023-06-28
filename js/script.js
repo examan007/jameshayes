@@ -1,4 +1,4 @@
-function createBubbleChart(error, countries, continentNames, technology) {
+function createBubbleChart(error, countries, continentNames, getTechnology) {
     var console = {
         log: function(msg) {},
         error: function(msg) {},
@@ -146,9 +146,23 @@ function createBubbleChart(error, countries, continentNames, technology) {
             d.Population = 10000
             return circleSize.min
         })
+        .style("visibility", "hidden")
         createForceSimulation()
         updateCircles()
   }
+    function setRadius(radius, data) {
+        if (radius == getCircleSizes().med) {
+            data.Population = 37000
+            return getCircleSizes().med
+        } else
+        if (radius == getCircleSizes().max) {
+            data.population =100000
+            return circleSize.max
+        } else {
+           data.Population = 10000
+           return getCircleSizes().min
+        }
+    }
   var MaxRollCount = 8
   function processClickCircle(data, clickedCircle) {
         const curradius = Number(clickedCircle.attr("r"))
@@ -158,37 +172,28 @@ function createBubbleChart(error, countries, continentNames, technology) {
                 var rolecount = 0
                 svg.selectAll("circle")
                 .attr("r", function (d) {
-                   function setRadius(radius) {
-                        if (radius == getCircleSizes().med) {
-                            d.Population = 37000
-                            return getCircleSizes().med
-                        } else
-                        if (radius == getCircleSizes().max) {
-                            d.population =100000
-                            return circleSize.max
-                        } else {
-                           d.Population = 10000
-                           return getCircleSizes().min
-                        }
-                   }
+                    const element = d3.select(this)
                     if (data.ContinentCode === "AF") {
                         if (d.ContinentCode === "AS" && rolecount < MaxRollCount) {
                             rolecount += 1
-                            return setRadius(getCircleSizes().med)
+                            element.style("visibility", "visible")
+                            return setRadius(getCircleSizes().med, d)
                         } else {
-                            return setRadius(getCircleSizes().min)
+                            return setRadius(getCircleSizes().min, d)
                         }
                     } else
                     if (d.CountryCode === code || d.ContinentCode === "AF") {
-                            return setRadius(getCircleSizes().med)
+                            element.style("visibility", "visible")
+                            return setRadius(getCircleSizes().med, d)
                     } else {
-                            return setRadius(getCircleSizes().min)
+                            return setRadius(getCircleSizes().min, d)
                     }
                 })
             }
             function maximize() {
-                 data.x = (getWindowDimensions().width / 2) // - (getCircleSizes().max / 2)
-                 data.y = (getWindowDimensions().height / 2) // - (getCircleSizes().max / 2)
+                 //data.x = (getWindowDimensions().width / 2) // - (getCircleSizes().max / 2)
+                 //data.y = (getWindowDimensions().height / 2) // - (getCircleSizes().max / 2)
+                 clickedCircle.style("visibility", "visible")
                  getAllCountryCodeObjects(data.CountryCode)
                  return {
                     radius: circleSize.max,
@@ -217,7 +222,42 @@ function createBubbleChart(error, countries, continentNames, technology) {
         clickedCircle.attr("r", newradius.radius.toString())
         console.log(JSON.stringify(data))
         data.Population = newradius.population
-        createForceSimulation()
+        getTechnology(data.CountryCode, data.ContinentCode, (techlist)=> {
+            const newarray = []
+            function isInTechList(country) {
+                if (newarray.some(element=> element === country)) {
+                    return false
+                }
+                function check(index) {
+                    const test = techlist[index]
+                    if (typeof(test) !== 'undefined') {
+                        //console.log("checking: [" + test + "] [" + country + "]")
+                        if (test == country) {
+                            return true
+                        } else
+                        if (test == country.split(" ")[0]) {
+                            return true
+                        }
+                        return check(index + 1)
+                    }
+                    return false
+                }
+                return check(0)
+            }
+            svg.selectAll("circle")
+            .attr("r", function (d) {
+                const element = d3.select(this)
+                if (d.ContinentCode === "NA")
+                if (isInTechList(d.CountryName)) {
+                    newarray.push(d.CountryName)
+                    element.style("visibility", "visible")
+                    return setRadius(getCircleSizes().med, d)
+                }
+                return element.attr("r")
+
+            })
+        })
+       createForceSimulation()
         updateCircles()
     }
   function createCircles() {
@@ -245,6 +285,7 @@ function createBubbleChart(error, countries, continentNames, technology) {
         .append("circle")
         .attr("r", function(d) { return circleRadiusScale(d.Population); })
         .attr("class", "neod3circle")
+        .style("visibility", "hidden")
 
         function addText(index) {
             var exitflag = true
@@ -288,6 +329,13 @@ function createBubbleChart(error, countries, continentNames, technology) {
         return flagFill() ? "url(#" + d.CountryCode + ")" : continentColorScale(d.ContinentCode);
       })
       const r = +circle.attr("r")
+      if (r > getCircleSizes().min) {
+        circle.style("visibility", "visible")
+        circle.style("display", "block")
+      } else {
+        circle.style("visibility", "hidden")
+        circle.style("display", "none")
+      }
       const x = +circle.attr("cx");
       const y = +circle.attr("cy");
       //console.log("x:", x);
@@ -347,7 +395,7 @@ function createBubbleChart(error, countries, continentNames, technology) {
             }), 100)
         }
     }
-    window.setTimeout(()=> { adjustText(0) }, 2000)
+    window.setTimeout(()=> { adjustText(0) }, 500)
   }
   function createForces() {
     var forceStrength = 0.05;

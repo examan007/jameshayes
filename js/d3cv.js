@@ -1,5 +1,5 @@
 d3Application = function () {
-    var consolex = {
+    var console = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -92,9 +92,6 @@ d3Application = function () {
                         }
                         const bias  = getPopulationValue()
                         const value = getPopulationValue()
-                        function getTechnology() {
-                            return [ "Java", "C/C++", "Scala", "Javascript"]
-                        }
                         function getDegrees(ix) {
                             return ((360 / numberofjobs) * ix - 180).toString()
                         }
@@ -234,10 +231,48 @@ d3Application = function () {
         .defer(d3.json, "data/continent-names.json")
         .defer(d3.json, "data/technology.json")
         .await((error, countries, continents, technology)=> {
+            function buildTechList(jsonobj) {
+                const exptext = JSON.stringify(jsonobj)
+                console.log("experience: [" + exptext + "]")
+                const newarray = []
+                function checkTech(index) {
+                    const tech = technology[index]
+                    if (typeof(tech) != 'undefined') {
+                        function pushNewTech() {
+                            if ( ! newarray.some(element => element === tech)) {
+                                console.log("new tech = [" + tech + "]")
+                                newarray.push(tech)
+                            } else {
+                                console.log("duplicate tech")
+                            }
+                        }
+                        try {
+                            const regex = new RegExp("\\b" + tech + "\\b", 'i');
+                            if (regex.test(exptext)) {
+                                pushNewTech()
+                            }
+                        } catch (e) {
+                            console.log(e.stack.toString())
+                            if (exptext.includes(tech)) {
+                                pushNewTech()
+                            }
+                        }
+                        checkTech(index + 1)
+                    }
+                }
+                checkTech(0)
+                return newarray
+            }
             console.log(JSON.stringify(countries[0]))
             const continents_map = mapContinents(continents)
             const countries_map = mapCountries(continents_map, countries, technology)
-            const d3module = createBubbleChart(error, countries_map, continents_map, technology)
+            const d3module = createBubbleChart(error, countries_map, continents_map,
+                (experindex, continent, callback)=> {
+                    if (continent === "AS") {
+                        console.log("getTechnology()")
+                        callback(buildTechList(jsonData.experience[experindex]))
+                    }
+                })
             console.log("Done.")
                             d3.select("svg")
                               .attr("transform", `scale(1)`);
