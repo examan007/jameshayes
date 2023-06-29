@@ -320,7 +320,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
       var info = "";
       if (country) {
         //info = [country.CountryName, formatPopulation(country.Population)].join(": ");
-        info = country.CountryName + ":" + JSON.stringify(getWindowDimensions())
+        info = country.CountryName // + ":" + JSON.stringify(getWindowDimensions())
           d3.select("#country-info").html(info);
       }
     }
