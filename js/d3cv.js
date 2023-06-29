@@ -3,7 +3,7 @@ d3Application = function () {
         log: function(msg) {},
         error: function(msg) {},
     }
-
+  const InitialRoleCount = 8
   console.log("getData")
   LogMgr = LoginManager().getData(
     "data/resume.json",
@@ -84,7 +84,7 @@ d3Application = function () {
                     } else
                     for (let i = 0; i < numberofjobs; i++) {
                         function getPopulationValue () {
-                            if (filter_code  === "Title" && i < 10) {
+                            if (filter_code  === "Title" && i < InitialRoleCount) {
                                 return 50000
                             } else {
                                 return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
@@ -231,6 +231,20 @@ d3Application = function () {
         .defer(d3.json, "data/continent-names.json")
         .defer(d3.json, "data/technology.json")
         .await((error, countries, continents, technology)=> {
+            function testExperienceForTech(exptext, tech) {
+             try {
+                 const regex = new RegExp("\\b" + tech + "\\b", 'i');
+                 if (regex.test(exptext)) {
+                     return true
+                 }
+             } catch (e) {
+                 console.log(e.stack.toString())
+                 if (exptext.includes(tech)) {
+                     return true
+                 }
+             }
+             return false
+            }
             function buildTechList(jsonobj) {
                 const exptext = JSON.stringify(jsonobj)
                 console.log("experience: [" + exptext + "]")
@@ -274,7 +288,17 @@ d3Application = function () {
                     } else {
                         callback(null)
                     }
-                })
+                },
+                (experindex, continent, tech)=> {
+                   console.log("getTechExperiences() continent code = [" + continent + "]")
+                   if (continent === "AS") {
+                        console.log("getTechExperiences()")
+                        const expobj = jsonData.experience[experindex]
+                        return testExperienceForTech(JSON.stringify(expobj), tech)
+                    }
+                    return false
+                }
+            )
             console.log("Done.")
                             d3.select("svg")
                               .attr("transform", `scale(1)`);

@@ -1,4 +1,4 @@
-function createBubbleChart(error, countries, continentNames, getTechnology) {
+function createBubbleChart(error, countries, continentNames, getTechnology, testExperience) {
     var console = {
         log: function(msg) {},
         error: function(msg) {},
@@ -163,7 +163,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
         updateCircles()
   }
 
-  const DefaultMinRollCount = 9
+  const DefaultMinRollCount = 24
   const DefaultMaxRollCount = 24
   var MaxRollCount = DefaultMinRollCount
   function processClickCircle(data, clickedCircle) {
@@ -179,6 +179,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
                         if (d.ContinentCode === "AS" && rolecount < MaxRollCount) {
                             rolecount += 1
                             element.style("visibility", "visible")
+                            element.style("display", "block")
                             return setRadius(getCircleSizes().med, d)
                         } else {
                             element.style("visibility", "hidden")
@@ -194,11 +195,34 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
                     }
                 })
             }
+            function getAllRoleObjects(tech) {
+                if (data.ContinentCode === "NA") {
+                    svg.selectAll("circle")
+                    .attr("r", function (d) {
+                        const element = d3.select(this)
+                        function select() {
+                            element.style("visibility", "visible")
+                            element.style("display", "block")
+                            return setRadius(getCircleSizes().med, d)
+                        }
+                        if (d.ContinentCode === "AF") {
+                            return select()
+                        } else
+                        if (d.ContinentCode === "AS") {
+                            if (testExperience(d.CountryCode, d.ContinentCode, tech)) {
+                                return select()
+                            }
+                        }
+                        return d.r
+                    })
+                }
+            }
             function maximize() {
                  //data.x = (getWindowDimensions().width / 2) // - (getCircleSizes().max / 2)
                  //data.y = (getWindowDimensions().height / 2) // - (getCircleSizes().max / 2)
                  clickedCircle.style("visibility", "visible")
                  getAllCountryCodeObjects(data.CountryCode)
+                 getAllRoleObjects(data.CountryName)
                  return {
                     radius: circleSize.max,
                     population: 100000
@@ -222,10 +246,11 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
                 return maximize()
             }
         }
-        const newradius = getNewRadius(curradius + circleSize.max / 20)
+        const newradius = getNewRadius(curradius) //+ circleSize.max / 20)
         clickedCircle.attr("r", newradius.radius.toString())
         console.log(JSON.stringify(data))
         data.Population = newradius.population
+        console.log("getTechnology()")
         getTechnology(data.CountryCode, data.ContinentCode, (techlist)=> {
             const newarray = []
             function isInTechList(country) {
@@ -259,7 +284,6 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
                         return setRadius(getCircleSizes().med, d)
                     }
                     return element.attr("r")
-
                 })
             }
            createForceSimulation()
@@ -356,7 +380,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
          }
       })
       group.selectAll("text").each(function (element, i) {
-         console.log("numlines=[" + numlines + "] element=[" + JSON.stringify(element) + "]")
+         //console.log("numlines=[" + numlines + "] element=[" + JSON.stringify(element) + "]")
          const offset = (4 - numlines)/2
          const text = d3.select(this)
          if (r == getCircleSizes().max) {
