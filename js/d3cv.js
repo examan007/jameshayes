@@ -271,6 +271,8 @@ d3Application = function () {
                     if (continent === "AS") {
                         console.log("getTechnology()")
                         callback(buildTechList(jsonData.experience[experindex]))
+                    } else {
+                        callback(null)
                     }
                 })
             console.log("Done.")

@@ -248,21 +248,23 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
                 }
                 return check(0)
             }
-            svg.selectAll("circle")
-            .attr("r", function (d) {
-                const element = d3.select(this)
-                if (d.ContinentCode === "NA")
-                if (isInTechList(d.CountryName)) {
-                    newarray.push(d.CountryName)
-                    element.style("visibility", "visible")
-                    return setRadius(getCircleSizes().med, d)
-                }
-                return element.attr("r")
+            if (techlist != null) {
+                svg.selectAll("circle")
+                .attr("r", function (d) {
+                    const element = d3.select(this)
+                    if (d.ContinentCode === "NA")
+                    if (isInTechList(d.CountryName)) {
+                        newarray.push(d.CountryName)
+                        element.style("visibility", "visible")
+                        return setRadius(getCircleSizes().med, d)
+                    }
+                    return element.attr("r")
 
-            })
+                })
+            }
+           createForceSimulation()
+            updateCircles()
         })
-       createForceSimulation()
-        updateCircles()
     }
   function createCircles() {
     var formatPopulation = d3.format(",");
