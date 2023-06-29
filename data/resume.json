@@ -204,14 +204,22 @@
     {
       "company": "IBM Canada",
       "location": "Markham, ON",
-      "title": "Software Engineer",
-      "dates": "Mar ‘95-Feb ’97",
+      "title": "Advisory IT Specialist",
+      "dates": "Dec ‘96-Mar ’97",
       "responsibilities": [
-        "Various contracts as an individual contributor were performed including numerous telephony-based projects.",
-        "Projects were delivered for Canadian and international customers with requirements that included integration with voice mail systems, IVR, ACD, CTI, and other call center technologies.",
-        "One project involved multiple sites in the US and Europe with a specific focus on middleware design and implementation using IBM MQSeries.",
-        "Technologies used include Visual C++, VB, MFC, AIX, MQSeries, HP OpenView, LAN",
-        "Analysis and improvement of internal project documentation were undertaken."
+        "Interactive Voice Response (IVR) systems; voice recognition; using AIX, and telephony framework."
+      ]
+    },
+    {
+      "company": "Legacy Storage Systems",
+      "location": "Markham, ON",
+      "title": "Software Specialist",
+      "dates": "Mar ‘93-Nov ’96",
+      "responsibilities": [
+        "Standards and infrastructure for development and certification of storage products; SCSI, RAID, NFS.",
+        "Implement remote serviceability of data storage products using; VxWorks, C++, SLIP, FTP, TELNET.",
+        "Embedded communications using Signetics I2C and SCSI technologies between hot-swap modules.",
+        "Develop and benchmark storage subsystems on Netware with SNMP proxy and RS-232 driver."
       ]
     }
   ]
