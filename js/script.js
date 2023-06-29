@@ -346,8 +346,16 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
       //console.log("y:", y);
       //console.log("r:", r);
       //console.log("r:", getCircleSizes().med);
+      var numlines = 0
       group.selectAll("text").each(function (element, i) {
-//         console.log("element=[" + JSON.stringify(element) + "]")
+         const text = d3.select(this)
+         if (text.text().length > 0) {
+            numlines = numlines + 1
+         }
+      })
+      group.selectAll("text").each(function (element, i) {
+         console.log("numlines=[" + numlines + "] element=[" + JSON.stringify(element) + "]")
+         const offset = (4 - numlines)/2
          const text = d3.select(this)
          if (r == getCircleSizes().max) {
             function getMaxFontSize() {
@@ -359,14 +367,14 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
             }
             function getYOffset() {
                 if (element.ContinentCode === "AF") {
-                    return y + (i - 0.5) * fontsize
+                    return y + (i - 1.5 + offset) * fontsize
                 } else {
-                    return y + (i - 1) * fontsize
+                    return y + (i - 1.5 + offset) * fontsize
                 }
             }
             const fontsize = getMaxFontSize()
             text.style("font-size", fontsize.toString() + "px")
-            .attr("x", x - getCircleSizes().max / 1.5 )
+            .attr("x", x - getCircleSizes().max / 1.6 )
             .attr("y", getYOffset())
             .style("display", display)
             .style("font-family", "Copperplate Gothic, sans-serif")
@@ -379,7 +387,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology) {
             const fontsize = getCircleSizes().med / 4
             text.style("font-size", fontsize.toString() + "px")
             .attr("x", x - getCircleSizes().med / 2)
-            .attr("y", y + (i - 1.5) * fontsize)
+            .attr("y", y + (i - 1.5 + offset) * fontsize)
             .style("display", display)
          } else {
             text
