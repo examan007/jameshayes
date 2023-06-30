@@ -117,24 +117,22 @@
       ]
     },
     {
-      "company": "Beta Systems Software of Canada",
+      "company": "Beta Systems Software of Canada (Traded with Proginet Corp. - original position with Blockade Systems Corp. below)",
       "location": "Toronto, ON",
       "title": "Software Security Engineering",
       "dates": "Jan ’09-Apr ‘11",
       "responsibilities": [
-        "(Traded with Proginet Corp. - original position with Blockade Systems Corp. below)",
         "Program installed on a Windows client with invocation methods bound to service or credential provider event functions. Communications utilized an HTTP proxy. Security was provided using OpenSSL and PKI.",
         "Responsibilities included maintenance of security product lines providing authentication, authorization, and password management that were acquired by an asset trade with Proginet or purchase from Blockade",
         "Product enhancements were accomplished over two major releases. This involved port across multiple platforms including Linux, UNIX, z/OS, and Windows. Additional technologies include MFC, MSI, WIX, Perforce, SAP, OpenLDAP, AD, MS SQL, IIS, Javascript, HTML, CSS, XML, XSL, Javascript, SDLC."
       ]
     },
     {
-      "company": "Proginet Corp.",
+      "company": "Proginet Corp. (Purchased Blockade Systems Corp.)",
       "location": "Toronto, ON",
       "title": "Team Lead/Senior Developer",
       "dates": "Jun ’05-Jan ‘09",
       "responsibilities": [
-        "(Purchased Blockade Systems Corp.)",
         "SaaS product providing a web application to manage email attachments was developed as a major contributor. Essentially the send functionality of an email application was required, including resolution of the recipients' list gained by a database query given a “to/cc/bcc” field entry.",
         "Implementation required HTTP encode and decode, including MIME content handling. Technologies included mySQL, AJAX, Javascript, Java, J2EE, Servlets, Struts, JDBC, Apache Tomcat, REST API",
         "Secure communications hub running on z/OS UNIX System Services was maintained and enhanced, including several critical bug fixes. This provides an HTTP, RADIUS, and TACACS+ server. Configuration management and synchronization transactions are handled by proprietary TCP and UDP messaging protocols. Additional technologies included SAP ABAP, Java, C/C++, SOAP"
@@ -152,12 +150,11 @@
       ]
     },
     {
-      "company": "Blockade Systems Corp.",
+      "company": "Blockade Systems Corp. (Purchased by Proginet Corp.)",
       "location": "Toronto, ON",
       "title": "Team Lead Software R&D",
       "dates": "Nov ’99-Jan ‘05",
       "responsibilities": [
-        "(Purchased by Proginet Corp.)",
         "Leading a team of developers and being responsible for design, interface definition, and project management, modules and agents for ManageID were developed that integrate an enterprise security server running on z/OS with security systems such as RACF, CA-ACF2, CA-TSS, AD, LDAP, NDS/eDir, PAM.",
         "High degree of interchangeability was designed and implemented as a plug-in module architecture. This supported the distribution of various agents using proprietary configuration and notification messaging protocols. An interchangeable Oracle, Microsoft SQL, or Access database module persists identities.",
         "Management agent (MA) for Microsoft Identity Integration Server (MIIS) and z/OS RACF was developed and optimized to perform well for a large-scale enterprise environment of a million users with C# .Net.",
