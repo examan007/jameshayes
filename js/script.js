@@ -19,7 +19,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
       return {
         width: width,
         height: height,
-      };
+      }
     }
   var width = getWindowDimensions().width,
       height = getWindowDimensions().height - 50;
@@ -400,7 +400,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
             }
             const fontsize = getMaxFontSize()
             text.style("font-size", fontsize.toString() + "px")
-            .attr("x", x - getCircleSizes().max / 1.6 )
+            .attr("x", x - getCircleSizes().max / 1.5 )
             .attr("y", getYOffset())
             .style("display", display)
             .style("font-family", "Copperplate Gothic, sans-serif")

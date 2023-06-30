@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/bubble.css" rel="stylesheet">
+    <link href="css/timeline.css" rel="stylesheet">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-queue.v3.min.js"></script>
     <script src="js/script.js"></script>
@@ -29,11 +30,17 @@
     <label><input id="flags" type="radio" name="fill" value="flags">Flags</label>
   </span>
 </div>
+<div>
+    <div id="timeline1" class="timeline"></div>
+    <div id="timeline2" class="timeline"></div>
+</div>
 <div id="country-info"></div>
 <div id="bubble-chart"></div>
 <script src="https://neonow.neolation.com/js/login.js"></script>
 <script src="js/bubble.js"></script>
 <script src="js/d3cv.js"></script>
+<script src="js/d3-timelines.js"></script>
+<script src="js/timeline.js"></script>
 <script>
     d3Application()
 </script>
