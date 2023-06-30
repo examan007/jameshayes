@@ -1,9 +1,11 @@
-d3Application = function () {
+d3Application = function (ready, updateRoles) {
+    const ThisApp = this
     var console = {
         log: function(msg) {},
         error: function(msg) {},
     }
-  const InitialRoleCount = 8
+  var d3module = null
+  const InitialRoleCount = 32
   console.log("getData")
   LogMgr = LoginManager().getData(
     "data/resume.json",
@@ -46,6 +48,7 @@ d3Application = function () {
             const newarray = []
             function mapCountriesByContinents(static_countries, index) {
                 try {
+                    const activeroles = []
                     const mapvalue = defaultmapvalues[index]
                     const continent_code = getKeyByValue(continents_map, mapvalue.title)
                     if (continent_code == null) {
@@ -60,7 +63,7 @@ d3Application = function () {
                             "CountryName":jsonData.name,
                             "CountryCode":jsonData.email,
                             "ContinentCode": continent_code,
-                            "CenterLongitude": 0,
+                            "CenterLongitude": "",
                             "CenterLatitude": 0,
                             "Population": 100000
                         })
@@ -73,7 +76,7 @@ d3Application = function () {
                                     "CountryName": tech,
                                     "CountryCode": tech,
                                     "ContinentCode": continent_code,
-                                    "CenterLongitude": 0,
+                                    "CenterLongitude": "",
                                     "CenterLatitude":  0,
                                     "Population": 10000
                                 })
@@ -85,13 +88,14 @@ d3Application = function () {
                     for (let i = 0; i < numberofjobs; i++) {
                         function getPopulationValue () {
                             if (filter_code  === "Title" && i < InitialRoleCount) {
+                                activeroles.push(jsonData.experience[i].dates)
                                 return 50000
                             } else {
                                 return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
                             }
                         }
                         const bias  = getPopulationValue()
-                        const value = getPopulationValue()
+                        const value = bias
                         function getDegrees(ix) {
                             return ((360 / numberofjobs) * ix - 180).toString()
                         }
@@ -115,7 +119,7 @@ d3Application = function () {
                                     "CountryName":jsonData.experience[i].title,
                                     "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
-                                    "CenterLongitude":getDegrees(i),
+                                    "CenterLongitude": jsonData.experience[i].dates,
                                     "CenterLatitude": getLatitude(index),
                                     "Population": value.toString()
                                 }
@@ -157,6 +161,7 @@ d3Application = function () {
                         }
                         createNewObject()
                     }
+                    updateRoles(activeroles, '#1f77b4', true)
                     return mapCountriesByContinents(static_countries, index + 1)
                 } catch (e) {
                     console.log(e.stack.toString())
@@ -175,7 +180,7 @@ d3Application = function () {
           };
         }
 
-        function initializeResizing(d3module) {
+        function initializeResizing(d3modobj) {
             // Select the SVG container element
             const svgContainer = d3.select("svg");
 
@@ -217,7 +222,7 @@ d3Application = function () {
               svgContainer.attr("width", svgWidth)
                           .attr("height", svgHeight);
 
-                d3module.updateCircles()
+                d3modobj.updateCircles()
             }
 
             // Attach an event listener to the window resize event
@@ -280,7 +285,7 @@ d3Application = function () {
             console.log(JSON.stringify(countries[0]))
             const continents_map = mapContinents(continents)
             const countries_map = mapCountries(continents_map, countries, technology)
-            const d3module = createBubbleChart(error, countries_map, continents_map,
+            d3module = createBubbleChart(error, countries_map, continents_map,
                 (experindex, continent, callback)=> {
                     if (continent === "AS") {
                         console.log("getTechnology()")
@@ -297,8 +302,25 @@ d3Application = function () {
                         return testExperienceForTech(JSON.stringify(expobj), tech)
                     }
                     return false
+                },
+                updateRoles,
+                (index, continent)=> {
+                    if (continent === "AF") {
+                        const text = JSON.stringify(jsonData.summary)
+                        return text
+                    } else
+                    try {
+                        const text = JSON.stringify(jsonData.experience[index].responsibilities[0])
+                        return text
+                    } catch (e) {
+                        console.log(e.stack.toString())
+                    }
+                    return ""
                 }
             )
+            window.setTimeout( function () {
+                ready(ThisApp)
+            }, 500)
             console.log("Done.")
                             d3.select("svg")
                               .attr("transform", `scale(1)`);
@@ -307,6 +329,10 @@ d3Application = function () {
         })
     })
   return {
-    status: 0
+    status: 0,
+    getMax: function () {
+        console.log("module=[" + d3module.toString() + "]")
+        return d3module.getCircleSizes().max
+    }
   }
 }

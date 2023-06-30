@@ -1,5 +1,10 @@
-function createBubbleChart(error, countries, continentNames, getTechnology, testExperience) {
-    var console = {
+createBubbleChart = function (error, countries, continentNames,
+     getTechnology,
+     testExperience,
+     updateRoles,
+     getDescription
+     ) {
+    var consolex = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -172,6 +177,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
         function getNewRadius(newradius) {
            function getAllCountryCodeObjects(code) {
                 var rolecount = 0
+                const activeroles = []
                 svg.selectAll("circle")
                 .attr("r", function (d) {
                     const element = d3.select(this)
@@ -180,6 +186,7 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
                             rolecount += 1
                             element.style("visibility", "visible")
                             element.style("display", "block")
+                            activeroles.push(d.CenterLongitude)
                             return setRadius(getCircleSizes().med, d)
                         } else {
                             element.style("visibility", "hidden")
@@ -194,8 +201,17 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
                             return setRadius(getCircleSizes().min, d)
                     }
                 })
+                .on("end", function() {
+                     console.log("end")
+                     updateRoles(activeroles, '#1f77b4', true, getCircleSizes().max)
+                })
+                window.setTimeout(function () {
+                      console.log("end")
+                      updateRoles(activeroles, '#1f77b4', true, getCircleSizes().max)
+                }, 1000)
             }
             function getAllRoleObjects(tech) {
+                const activeroles = []
                 if (data.ContinentCode === "NA") {
                     svg.selectAll("circle")
                     .attr("r", function (d) {
@@ -210,11 +226,20 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
                         } else
                         if (d.ContinentCode === "AS") {
                             if (testExperience(d.CountryCode, d.ContinentCode, tech)) {
+                                activeroles.push(d.CenterLongitude)
                                 return select()
                             }
                         }
                         return d.r
                     })
+                    .on("end", function() {
+                         console.log("end")
+                         updateRoles(activeroles, '#d62728', true, getCircleSizes().max)
+                    })
+                    window.setTimeout(function () {
+                          console.log("end")
+                          updateRoles(activeroles, '#d62728', true, getCircleSizes().max)
+                    }, 1000)
                 }
             }
             function maximize() {
@@ -251,6 +276,9 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
         console.log(JSON.stringify(data))
         data.Population = newradius.population
         console.log("getTechnology()")
+        if (data.ContinentCode === "AS") {
+            updateRoles([data.CenterLongitude], '#ff7f0e', true, getCircleSizes().max)
+        }
         getTechnology(data.CountryCode, data.ContinentCode, (techlist)=> {
             const newarray = []
             function isInTechList(country) {
@@ -345,8 +373,9 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
     function updateCountryInfo(country) {
       var info = "";
       if (country) {
-        //info = [country.CountryName, formatPopulation(country.Population)].join(": ");
-        info = country.CountryName // + ":" + JSON.stringify(getWindowDimensions())
+        info = [country.CountryName, country.CenterLongitude,
+         getDescription(country.CountryCode, country.ContinentCode)].join(" ");
+        //info = country.CountryName // + ":" + JSON.stringify(getWindowDimensions())
           d3.select("#country-info").html(info);
       }
     }
@@ -675,7 +704,10 @@ function createBubbleChart(error, countries, continentNames, getTechnology, test
   }
   return {
     updateCircles: function () {
-       updateCircles();
+       updateCircles()
+    },
+    getCircleSizes: function () {
+        return getCircleSizes()
     }
   }
 }

@@ -23,6 +23,10 @@
   -moz-transform: translate(0px,40px); /* Firefox */
 }
 
+#timeline2 rect {
+    z-index: 1000;
+}
+
 .coloredDiv {
   height:20px; width:20px; float:left;
 }
@@ -30,22 +34,19 @@
 .timeline {
     height: 100px
     width: 100%;
-    padding: 20px;
+    padding: 0;
     padding-bottom: 0;
     border: 0;
     position: absolute;
-    bottom: 0;
     z-index: -1;
+    bottom: 5%;
 }
 
 svg {
     border: 0;
+    a-index: 1000;
 }
 
-#timeline1 g.container {
-    transform: translateY(1em);
-}
-
-#timeline2 g.container {
-    transform: translateY(-1em);
+svg g.container {
+    padding: 0;
 }
