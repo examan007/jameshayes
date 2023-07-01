@@ -2,9 +2,10 @@ createBubbleChart = function (error, countries, continentNames,
      getTechnology,
      testExperience,
      updateRoles,
-     getDescription
+     getDescription,
+     updateTime
      ) {
-    var consolex = {
+    var console = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -186,7 +187,10 @@ createBubbleChart = function (error, countries, continentNames,
                             rolecount += 1
                             element.style("visibility", "visible")
                             element.style("display", "block")
-                            activeroles.push(d.CenterLongitude)
+                            activeroles.push({
+                                dates: d.CenterLongitude,
+                                role: d.CountryCode
+                            })
                             return setRadius(getCircleSizes().med, d)
                         } else {
                             element.style("visibility", "hidden")
@@ -226,7 +230,10 @@ createBubbleChart = function (error, countries, continentNames,
                         } else
                         if (d.ContinentCode === "AS") {
                             if (testExperience(d.CountryCode, d.ContinentCode, tech)) {
-                                activeroles.push(d.CenterLongitude)
+                                activeroles.push({
+                                    dates: d.CenterLongitude,
+                                    role: d.CountryCode
+                                })
                                 return select()
                             }
                         }
@@ -277,7 +284,11 @@ createBubbleChart = function (error, countries, continentNames,
         data.Population = newradius.population
         console.log("getTechnology()")
         if (data.ContinentCode === "AS") {
-            updateRoles([data.CenterLongitude], '#ff7f0e', true, getCircleSizes().max)
+            updateRoles([{
+                dates: data.CenterLongitude,
+                role: data.CountryCode
+                }],
+                '#ff7f0e', true, getCircleSizes().max)
         }
         getTechnology(data.CountryCode, data.ContinentCode, (techlist)=> {
             const newarray = []
@@ -328,10 +339,18 @@ createBubbleChart = function (error, countries, continentNames,
         .append("g")
         .attr("class", "neod3group")
        .on("mouseover", function(d) {
+          d3.select(this).attr("opacity", 0.7)
           updateCountryInfo(d);
+          if (d.ContinentCode === "AS") {
+              updateTime(d.CountryCode, "mouseover")
+          }
         })
         .on("mouseout", function(d) {
+         d3.select(this).attr("opacity", 1)
           updateCountryInfo();
+          if (d.ContinentCode === "AS") {
+              updateTime(d.CountryCode, "mouseout")
+          }
         })
         .on("click", function (d) {
            const group = d3.select(this);
@@ -708,6 +727,26 @@ createBubbleChart = function (error, countries, continentNames,
     },
     getCircleSizes: function () {
         return getCircleSizes()
+    },
+    updateRole: function (roleid, event) {
+        console.log("scripts.updateRole()")
+        svg.selectAll('circle')
+        .attr("opacity", function (d) {
+            if (d.ContinentCode === "AS" && d.CountryCode == roleid) {
+                console.log(JSON.stringify(d))
+                if (event === "mouseover") {
+                    updateCountryInfo(d);
+                    return 0.7
+                } else
+                if (event === "mouseout") {
+
+                } else
+                if (event === "click") {
+                    console.log(JSON.stringify(d))
+                    processClickCircle(d, d3.select(this))
+                }
+            }
+        })
     }
   }
 }

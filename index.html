@@ -31,12 +31,10 @@
     <label><input id="flags" type="radio" name="fill" value="flags">Flags</label>
   </span>
 </div>
-<div>
-    <div id="timeline1" class="timeline"></div>
-    <div id="timeline2" class="timeline"></div>
-</div>
 <div id="country-info"></div>
 <div id="bubble-chart"></div>
+<div id="timeline1" class="timeline"></div>
+<div id="timeline2" class="timeline"></div>
 <script src="https://neonow.neolation.com/js/login.js"></script>
 <script src="js/bubble.js"></script>
 <script src="js/d3cv.js"></script>
@@ -45,9 +43,10 @@
 <script>
     const timeApp = TimelineApplication()
     const d3App = d3Application(()=> {
-        timeApp.createTimeline(d3App.getMax())
+        timeApp.createTimeline(d3App.getMax(), d3App.updateRole)
     },
-    timeApp.updateRoles
+    timeApp.updateRoles,
+    timeApp.updateTime
     )
 </script>
 </body>

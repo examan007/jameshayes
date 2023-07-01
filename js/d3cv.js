@@ -1,4 +1,4 @@
-d3Application = function (ready, updateRoles) {
+d3Application = function (ready, updateRoles, updateTime) {
     const ThisApp = this
     var console = {
         log: function(msg) {},
@@ -88,6 +88,10 @@ d3Application = function (ready, updateRoles) {
                     for (let i = 0; i < numberofjobs; i++) {
                         function getPopulationValue () {
                             if (filter_code  === "Title" && i < InitialRoleCount) {
+                                activeroles.push({
+                                    dates: jsonData.experience[i].dates,
+                                    role: i
+                                })
                                 activeroles.push(jsonData.experience[i].dates)
                                 return 50000
                             } else {
@@ -316,6 +320,10 @@ d3Application = function (ready, updateRoles) {
                         console.log(e.stack.toString())
                     }
                     return ""
+                },
+                (roleid, event)=> {
+                    console.log("updateTime()")
+                    updateTime(roleid, event)
                 }
             )
             window.setTimeout( function () {
@@ -333,6 +341,10 @@ d3Application = function (ready, updateRoles) {
     getMax: function () {
         console.log("module=[" + d3module.toString() + "]")
         return d3module.getCircleSizes().max
+    },
+    updateRole: function (roleid, event) {
+        d3module.updateRole(roleid, event)
+        console.log("updateRole(): role=[" + roleid + "] event=[" + event + "]")
     }
   }
 }
