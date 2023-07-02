@@ -15,13 +15,6 @@
   font-size: 12px;
 }
 
-#timeline2 .axis {
-  transform: translate(0px,40px);
-  -ms-transform: translate(0px,40px); /* IE 9 */
-  -webkit-transform: translate(0px,40px); /* Safari and Chrome */
-  -o-transform: translate(0px,40px); /* Opera */
-  -moz-transform: translate(0px,40px); /* Firefox */
-}
 
 #timeline2 rect {
     z-index: 1500;
@@ -32,13 +25,13 @@
 }
 
 .timeline {
-    height: 100px
     width: 100%;
     padding: 0;
     padding-bottom: 0;
     border: 0;
     position: absolute;
-    bottom: 5%;
+    bottom: 0;
+    transform: translateX(-10%);
 }
 
 svg {
@@ -46,6 +39,11 @@ svg {
     a-index: 1000;
 }
 
-svg g.container {
+g.container {
     padding: 0;
+    width: 100%;
+}
+
+g.view {
+    width: 100%;
 }

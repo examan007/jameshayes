@@ -1,5 +1,5 @@
 html, body {
-  margin: 10px;
+  margin: 0px;
   padding: 0;
   font-family: sans-serif;
 }
@@ -22,13 +22,12 @@ span:nth-child(2) {
   color: #666;
   font-size: 28px;
   position: absolute;
-  top: 20px;
+  top:40px;
   left: 40px;
   z-index: -100;
 }
 
 svg {
-  border: 1px solid #ddd;
 }
 
 circle {
@@ -38,4 +37,7 @@ circle {
 
 .continent-key-element text {
   fill: white;
+}
+
+#bubble-chart {
 }

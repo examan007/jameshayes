@@ -1,4 +1,4 @@
-createBubbleChart = function (error, countries, continentNames,
+createBubbleChart = function (getScaling, error, countries, continentNames,
      getTechnology,
      testExperience,
      updateRoles,
@@ -28,16 +28,9 @@ createBubbleChart = function (error, countries, continentNames,
       }
     }
   var width = getWindowDimensions().width,
-      height = getWindowDimensions().height - 50;
+      height = getWindowDimensions().height;
     function getCircleSizes() {
-        if (width < 550 || height < 750) {
-            return { min: 0, med: 30, max: 50 }
-        } else
-        if (width <  800 || height < 1200) {
-            return { min: 0, med: 56, max: 100 };
-        } else {
-            return { min: 0, med: 68, max: 120 };
-        }
+        return getScaling()
     }
     function setRadius(radius, data) {
         if (radius == getCircleSizes().med) {
@@ -84,12 +77,12 @@ createBubbleChart = function (error, countries, continentNames,
         if (width > 500) {
             return 500
         }
-        return width - 50
+        return width
     }
     var keyElementWidth = getKeyWidth() / continents.values().length,
         keyElementHeight = keyElementWidth / 5;
     var onScreenYOffset = keyElementHeight*1.5,
-        offScreenYOffset = 100;
+        offScreenYOffset = -(height * 20 / 100)
     var keyElementSize = (keyElementWidth / 8)  + "px"
 
     if (d3.select(".continent-key").empty()) {
@@ -97,8 +90,8 @@ createBubbleChart = function (error, countries, continentNames,
     }
     var continentKey = d3.select(".continent-key");
 
-    if (showContinentKey) {
-      translateContinentKey("translate(0," + (height - onScreenYOffset) + ")");
+    if (true) { //showContinentKey) {
+ //     translateContinentKey("translate(0," + (height - onScreenYOffset) + ")");
     } else {
       translateContinentKey("translate(0," + (height + offScreenYOffset) + ")");
     }
@@ -111,7 +104,6 @@ createBubbleChart = function (error, countries, continentNames,
 
       svg.append("g")
         .attr("class", "continent-key")
-        .attr("transform", "translate(0," + (height + offScreenYOffset) + ")")
         .selectAll("g")
         .data(continents.values())
         .enter()
@@ -675,7 +667,7 @@ createBubbleChart = function (error, countries, continentNames,
       var onScreenXOffset = 40,
           offScreenXOffset = -40;
       var onScreenYOffset = 40,
-          offScreenYOffset = 100;
+          offScreenYOffset = 0;
 
       if (d3.select(".x-axis").empty()) {
         createAxes();

@@ -19,18 +19,19 @@ TimelineApplication = function () {
         },
         {
             start: new Date(2025, 1, 1, 12, 0, 0),
-            end: Date(2025, 1, 2, 12, 0, 0),
+            end: new Date(2025, 1, 2, 12, 0, 0),
             role: 0
         }
       ]
       const testData = [{times: [ ]}]
-      const gradDates = [ 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025]
+      const gradDates = [1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025]
       const scaleDates = []
       function createScaleDates(index) {
         if (index < gradDates.length) {
+           const newyear = Number(gradDates[index]) - 1
            scaleDates.push({
-            start: new Date(gradDates[index], 1, 1, 12, 0, 0),
-             end: new Date(gradDates[index], 1, 5, 12, 0, 0),
+            start: new Date("" + newyear + "-12-28T12:00:00Z"),
+             end: new Date("" + newyear + "-12-31T12:00:00Z"),
              role: 0
            })
            createScaleDates(index + 1)
@@ -42,6 +43,7 @@ TimelineApplication = function () {
         if (index < data.length)
         {
             try {
+                console.log(JSON.stringify(data[index]))
                 const entry = {
                     starting_time: data[index].start.getTime(),
                     ending_time: data[index].end.getTime(),
@@ -54,20 +56,25 @@ TimelineApplication = function () {
             pushDate(index + 1, data, output)
         }
       }
-      pushDate(0, testDates, testData)
+      //pushDate(0, testDates, testData)
       pushDate(0, scaleDates, scaleData)
 
-      var width = window.innerWidth - window.innerWidth / 20;
+      var width = window.innerWidth;
       function timelineRectNoAxis(timelineid, color, data, nolabel, index, scale) {
+        if (typeof(scale) === 'undefined') {
+            console.log("Scale is not defined.")
+            return
+        }
         const chart = d3.timelines().showTimeAxis();
-
+        const height = Number(scale) / 4
+        console.log("scale=[" + scale + "] height=[" + height + "]")
         const svg = d3.select('#' + timelineid)
             .append("svg")
-            .attr("width", width)
+            .attr("width", width * 1.15)
+            .attr("height", "75")
             .datum(data).call(chart)
 
-        const height = scale / 4
-        const transY = index * ( height + scale / 8)
+        const transY = index * ( height + scale / 8) - height
         svg.selectAll('rect')
             .style("fill", color)
             .style("height", "" + height + "px")
@@ -103,11 +110,17 @@ TimelineApplication = function () {
                 }
             })
             .style("font-size", function (d) {
-                const size = height - height * (110 - scale) / 100
+                const size = height * 3 / 4
                 console.log("Font-size is: [" + size + "]")
                 return "" + size + "px"
             })
-           .style("transform", "translateY(" + transY + "px)")
+            .style("transform", function (d) {
+                if (scale === 50) {
+                    return "translateY(" + (transY - 10) + "px)"
+                } else {
+                    return "translateY(" + transY + "px)"
+                }
+            })
 
         }
         return {
@@ -129,14 +142,14 @@ TimelineApplication = function () {
         }
       }
     return {
-        Scale: 100,
         Objects: {},
         createTimeline: function (scale, newupdateRole) {
           updateRole = newupdateRole
           this.Scale = scale
           //timelineRectNoAxis('timeline2', '#ff7f0e', testData, true, 2, scale)
-          timelineRectNoAxis('timeline1', '#1f77b4', scaleData, false, 1, scale)
+          //timelineRectNoAxis('timeline1', '#1f77b4', scaleData, false, 1, scale)
           //timelineRectNoAxis('timeline2', '#1f77b4', testData, true, 2, scale)
+          timelineRectNoAxis('timeline1', '#000000', scaleData, false, 0, scale)
         },
         updateTime: function (roleid, event) {
             console.log("role=[" + roleid + "] event=[" + event + "]")
@@ -163,13 +176,9 @@ TimelineApplication = function () {
             if (times.length <= 0) {
                 return
             }
+            console.log(JSON.stringify(times))
             if (flag) {
-                const dates = [{
-                    start: new Date(1990, 1, 1, 12, 0, 0),
-                    end: new Date(1990, 1, 2, 12, 0, 0),
-                    role: -1
-                }
-                ]
+                const dates = [scaleDates[0]]
                 function setDate(index) {
                     if (times.length > 0)
                     if (index < times.length) {
@@ -177,11 +186,21 @@ TimelineApplication = function () {
                             console.log(JSON.stringify(times[index].dates))
                             const pair = times[index].dates.split("-")
                             const roleid = times[index].role
-                            dates.push({
-                                start: moment(pair[0],"MMM'YY").toDate(),
-                                end: moment(pair[1],"MMM'YY").toDate(),
+                            function getDate(momobj, days) {
+                                const year = momobj.year()
+                                const month = String(momobj.month() + 1).padStart(2, '0')
+                                const day = String(days).padStart(2, '0')
+                                const newdate = "" + year + "-" + month + "-" + day + "T12:00:00Z"
+                                console.log("new date is [" + newdate + "]")
+                                return (new Date(newdate))
+                            }
+                            const newdate = {
+                                start: getDate(moment(pair[0],"MMM'YY"), 1),
+                                end: getDate(moment(pair[1],"MMM'YY"), 28),
                                 role: roleid
-                            })
+                            }
+                            console.log(JSON.stringify(newdate))
+                            dates.push(newdate)
                         } catch (e) {
                             console.log(e.stack.toString())
                         }
@@ -189,11 +208,7 @@ TimelineApplication = function () {
                     }
                 }
                 setDate(0)
-                dates.push({
-                    start: new Date(2025, 1, 1, 12, 0, 0),
-                    end: new Date(2025, 1, 2, 12, 0, 0),
-                    role: MAX_ROLES
-                })
+                dates.push(scaleDates[scaleDates.length - 1])
                 const updateData = [{ times: [] }]
                 pushDate(0, dates, updateData)
                 //chart.setItems(updateData);
@@ -203,7 +218,7 @@ TimelineApplication = function () {
                 } catch (e) {
                     console.log(s.stack.toString())
                 }
-                Objects = timelineRectNoAxis('timeline2', color, updateData, true, 2, this.Scale)
+                Objects = timelineRectNoAxis('timeline2', color, updateData, true, 1, scale)
                 //registerRectEvents('timeline2')
 
                 console.log(JSON.stringify(updateData))

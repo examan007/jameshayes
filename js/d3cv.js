@@ -7,6 +7,18 @@ d3Application = function (ready, updateRoles, updateTime) {
   var d3module = null
   const InitialRoleCount = 32
   console.log("getData")
+    function getScaling() {
+        const width = window.innerWidth
+        const height = window.innerHeight
+        if (width < 550 || height < 750) {
+            return { min: 0, med: 30, max: 50 }
+        } else
+        if (width <  800 || height < 1200) {
+            return { min: 0, med: 56, max: 100 };
+        } else {
+            return { min: 0, med: 68, max: 120 };
+        }
+    }
   LogMgr = LoginManager().getData(
     "data/resume.json",
     (jsonData)=> {
@@ -92,7 +104,6 @@ d3Application = function (ready, updateRoles, updateTime) {
                                     dates: jsonData.experience[i].dates,
                                     role: i
                                 })
-                                activeroles.push(jsonData.experience[i].dates)
                                 return 50000
                             } else {
                                 return 10000 // / i + 2 ^ i // ( i + 1) ^ 2 //100 + (i ^ 2 * 1000)
@@ -165,7 +176,7 @@ d3Application = function (ready, updateRoles, updateTime) {
                         }
                         createNewObject()
                     }
-                    updateRoles(activeroles, '#1f77b4', true)
+                    updateRoles(activeroles, '#1f77b4', true, getScaling().max)
                     return mapCountriesByContinents(static_countries, index + 1)
                 } catch (e) {
                     console.log(e.stack.toString())
@@ -289,7 +300,7 @@ d3Application = function (ready, updateRoles, updateTime) {
             console.log(JSON.stringify(countries[0]))
             const continents_map = mapContinents(continents)
             const countries_map = mapCountries(continents_map, countries, technology)
-            d3module = createBubbleChart(error, countries_map, continents_map,
+            d3module = createBubbleChart(getScaling, error, countries_map, continents_map,
                 (experindex, continent, callback)=> {
                     if (continent === "AS") {
                         console.log("getTechnology()")
