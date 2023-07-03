@@ -324,17 +324,20 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
         })
     }
     var FadedFlag = false
+    var NotBlocked = true
     var CurrentCountryName = countries[0].CountryName
     function fadeOut(d) {
       var element = document.getElementById("bubble-menu");
-      var opacity = 1;
+      var opacity = FadedFlag ? 0.5: 1;
       function executeFading() {
           var timer = setInterval(function() {
+            NotBlocked = false
             if (FadedFlag == true) {
                 if (opacity >= 0.9) {
                   clearInterval(timer);
                   element.style.visibility = "visible";
                   FadedFlag = false;
+                  NotBlocked = true
                 }
                 element.style.opacity = opacity;
                 opacity += opacity * 0.1;
@@ -343,12 +346,14 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                   clearInterval(timer);
                   element.style.visibility = "hidden";
                   FadedFlag = true;
+                  NotBlocked = true
                 }
                 element.style.opacity = opacity;
                 opacity -= opacity * 0.1;
             }
           }, 50);
       }
+      if (NotBlocked == true)
       if (CurrentCountryName === d.CountryName) {
           executeFading()
       } else
@@ -369,7 +374,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
         .append("g")
         .attr("class", "neod3group")
        .on("mouseover", function(d) {
-          if (!FadedFlag) {
+          if (!FadedFlag && NotBlocked) {
               d3.select(this).attr("opacity", 0.7)
               updateCountryInfo(d);
               if (d.ContinentCode === "AS") {
