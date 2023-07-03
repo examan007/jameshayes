@@ -67,11 +67,12 @@ TimelineApplication = function () {
         }
         const chart = d3.timelines().showTimeAxis();
         const height = Number(scale) / 4
+        const totalheight = scale
         console.log("scale=[" + scale + "] height=[" + height + "]")
         const svg = d3.select('#' + timelineid)
             .append("svg")
             .attr("width", width * 1.15)
-            .attr("height", "75")
+            .attr("height", totalheight)
             .datum(data).call(chart)
 
         const transY = index * ( height + scale / 8) - height
