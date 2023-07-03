@@ -2,7 +2,11 @@
   "name": "James Hayes",
   "phone": "416-575-7301",
   "email": "james.hayes@neolation.com",
-  "summary": "Experienced professional computer software developer with the confidence to take on any technological challenge and ensure successful execution. Combining technical experience with interpersonal and teamwork skills has proven to provide effective and scaled task definition and execution. Repeated commendation has been received for high self-initiative and delivery into enterprise.",
+  "summary": [
+    "The latest revolution in Artificial Intelligence (AI) and Language Models (LM), such as OpenAI's GPT-3.5, has transformed the landscape of information accessibility. With this technological advancement, all known answers are now within reach, reshaping the way we approach problem-solving. As an experienced software developer, I possess a wealth of know-how and expertise that enables me to navigate this new realm effectively.",
+    "My ability to ask the right questions for AI systems to provide accurate and valuable answers has become a vital asset. Importantly, given the human-like error prone nature of AI, there must be automatic programmatic cross-checking in place before any process is ready for a critical mission. I am well-versed in harnessing the power of AI and LM to enhance productivity, streamline processes, and deliver innovative solutions. My proficiency in programming languages and software development frameworks empowers me to leverage the potential of AI to its fullest.",
+    "Through my career, I have consistently embraced change and leveraged emerging technologies to drive success. My adaptability, coupled with a strong foundation in software development, equips me to thrive in the ever-evolving landscape of AI and LM. By combining my extensive technical knowledge with the limitless possibilities of AI, I strive to provide cutting-edge solutions and contribute to advancements in the field. I am excited to be a part of this transformational era and continue pushing the boundaries of what is possible in software development."
+    ],
   "objective": "My goal is to join a team that collaborates, develops and maintains computer processes with emphasis on quality, security, and cross-platform discipline. I am looking for a company that is seeking help to get things done by leveraging container and cloud technology.",
   "experience": [
     {

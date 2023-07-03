@@ -68,7 +68,9 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
     svg = d3.select("#bubble-chart")
       .append("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .style("overflow", "hidden")
+        .style("position", "fixed")
   }
 
   function toggleContinentKey(showContinentKey) {
@@ -321,31 +323,71 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             updateCircles()
         })
     }
-  function createCircles() {
-    var formatPopulation = d3.format(",");
-    const circlegroups = svg.selectAll(".neod3group")
-      .data(countries)
+    var FadedFlag = false
+    var CurrentCountryName = countries[0].CountryName
+    function fadeOut(d) {
+      var element = document.getElementById("bubble-menu");
+      var opacity = 1;
+      function executeFading() {
+          var timer = setInterval(function() {
+            if (FadedFlag == true) {
+                if (opacity >= 0.9) {
+                  clearInterval(timer);
+                  element.style.visibility = "visible";
+                  FadedFlag = false;
+                }
+                element.style.opacity = opacity;
+                opacity += opacity * 0.1;
+            } else {
+                if (opacity <= 0.1) {
+                  clearInterval(timer);
+                  element.style.visibility = "hidden";
+                  FadedFlag = true;
+                }
+                element.style.opacity = opacity;
+                opacity -= opacity * 0.1;
+            }
+          }, 50);
+      }
+      if (CurrentCountryName === d.CountryName) {
+          executeFading()
+      } else
+      if (FadedFlag == false) {
+         CurrentCountryName = d.CountryName
+      } else {
+         executeFading()
+         CurrentCountryName = d.CountryName
+      }
+    }
+    function createCircles() {
+        var formatPopulation = d3.format(",");
+        const circlegroups = svg.selectAll(".neod3group")
+          .data(countries)
 
-    const group = circlegroups
+        const group = circlegroups
       .enter()
         .append("g")
         .attr("class", "neod3group")
        .on("mouseover", function(d) {
-          d3.select(this).attr("opacity", 0.7)
-          updateCountryInfo(d);
-          if (d.ContinentCode === "AS") {
-              updateTime(d.CountryCode, "mouseover")
+          if (!FadedFlag) {
+              d3.select(this).attr("opacity", 0.7)
+              updateCountryInfo(d);
+              if (d.ContinentCode === "AS") {
+                  updateTime(d.CountryCode, "mouseover")
+              }
           }
         })
         .on("mouseout", function(d) {
-         d3.select(this).attr("opacity", 1)
-          updateCountryInfo();
-          if (d.ContinentCode === "AS") {
-              updateTime(d.CountryCode, "mouseout")
-          }
+             d3.select(this).attr("opacity", 1)
+              updateCountryInfo();
+              if (d.ContinentCode === "AS") {
+                  updateTime(d.CountryCode, "mouseout")
+              }
         })
         .on("click", function (d) {
            const group = d3.select(this);
+           const circle = group.select("circle")
+           fadeOut(d)
            processClickCircle(d, group.select("circle"))
         })
 
@@ -382,12 +424,25 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
   }
 
     function updateCountryInfo(country) {
-      var info = "";
+      function getInfo() {
+          try {
+              if (country) {
+                if (country.ContinentCode === "AF") {
+                    return getDescription(country.CountryCode, country.ContinentCode)
+                } else {
+                    info = [country.CountryName, country.CenterLongitude,
+                    getDescription(country.CountryCode, country.ContinentCode)].join(" ");
+                    //info = country.CountryName // + ":" + JSON.stringify(getWindowDimensions())
+                    return info
+                }
+              }
+
+          } catch (e) {
+              return info + e.toString()
+          }
+      }
       if (country) {
-        info = [country.CountryName, country.CenterLongitude,
-         getDescription(country.CountryCode, country.ContinentCode)].join(" ");
-        //info = country.CountryName // + ":" + JSON.stringify(getWindowDimensions())
-          d3.select("#country-info").html(info);
+          d3.select("#country-info").html(getInfo());
       }
     }
 

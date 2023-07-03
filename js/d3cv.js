@@ -321,8 +321,25 @@ d3Application = function (ready, updateRoles, updateTime) {
                 updateRoles,
                 (index, continent)=> {
                     if (continent === "AF") {
-                        const text = JSON.stringify(jsonData.summary)
-                        return text
+                        try {
+                            const summary = jsonData.summary
+                            var ret = ""
+                            function showSummary(index) {
+                                if (index < summary.length) {
+                                    if (index < 0) {
+                                        ret = ret + ""<br>""
+                                    }
+                                    ret = ret + "<p>"
+                                    ret = ret + summary[index]
+                                    ret = ret + "</p>"
+                                   showSummary(index + 1)
+                                }
+                            }
+                            showSummary(0)
+                            return ret;
+                        } catch (e) {
+                            return e.stack.toString()
+                        }
                     } else
                     try {
                         const text = JSON.stringify(jsonData.experience[index].responsibilities[0])
