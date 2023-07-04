@@ -325,44 +325,58 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
     }
     var FadedFlag = false
     var NotBlocked = true
-    var CurrentCountryName = countries[0].CountryName
-    function fadeOut(d) {
+    var CurrentCountryContext = {
+        circle: null,
+        data: {
+            CountryName: countries[0].CountryName,
+            CountryCode: countries[0].CountryCode
+        }
+    }
+    function fadeOut(d, circle, completion) {
       var element = document.getElementById("bubble-menu");
       var opacity = FadedFlag ? 0.5: 1;
       function executeFading() {
           var timer = setInterval(function() {
             NotBlocked = false
             if (FadedFlag == true) {
-                if (opacity >= 0.9) {
+                if (opacity >= 0.75) {
                   clearInterval(timer);
                   element.style.visibility = "visible";
+                  opacity = 1
                   FadedFlag = false;
                   NotBlocked = true
                 }
                 element.style.opacity = opacity;
                 opacity += opacity * 0.1;
             } else {
-                if (opacity <= 0.1) {
+                if (opacity <= 0.25) {
                   clearInterval(timer);
                   element.style.visibility = "hidden";
+                  opacity = 0.15
                   FadedFlag = true;
                   NotBlocked = true
                 }
                 element.style.opacity = opacity;
-                opacity -= opacity * 0.1;
+                opacity -= opacity * 0.25;
             }
-          }, 50);
+          }, 250);
       }
       if (NotBlocked == true)
-      if (CurrentCountryName === d.CountryName) {
-          executeFading()
+      if (CurrentCountryContext.data.CountryName === d.CountryName) {
+         CurrentCountryContext.circle = circle
+         CurrentCountryContext.data = d
+         executeFading()
       } else
       if (FadedFlag == false) {
-         CurrentCountryName = d.CountryName
+         CurrentCountryContext.circle = circle
+         CurrentCountryContext.data = d
+         completion(d, circle)
       } else {
          executeFading()
-         CurrentCountryName = d.CountryName
       }
+      console.log("completion(" + JSON.stringify(CurrentCountryContext.data) + ") [" + JSON.stringify(d) + "]")
+      completion(CurrentCountryContext.data, CurrentCountryContext.circle)
+
     }
     function createCircles() {
         var formatPopulation = d3.format(",");
@@ -392,8 +406,9 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
         .on("click", function (d) {
            const group = d3.select(this);
            const circle = group.select("circle")
-           fadeOut(d)
-           processClickCircle(d, group.select("circle"))
+           fadeOut(d, circle, function (curdata, curcircle) {
+               processClickCircle(curdata, curcircle)
+           })
         })
 
 
