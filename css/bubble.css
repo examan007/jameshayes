@@ -43,3 +43,6 @@ svg g.x-axis g.tick text {
         position: fixed;
         top: 0;
 }
+#search-input {
+    display: none;
+}

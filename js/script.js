@@ -156,7 +156,8 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             const position = rect.getBoundingClientRect()
             const search = document.getElementById('search-input');
             search.setAttribute("style",
-                "position: fixed;" +
+                 "display: block;" +
+                 "position: fixed;" +
                  "left: " + position.left + "px;" +
                  "width: " + position.width + "px;" +
                  "height: " + position.height + "px;"
@@ -378,6 +379,8 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             function select() {
                element.style("visibility", "visible")
                element.style("display", "block")
+               CurrentCountryContext.data.CountryName = d.CountryName
+               FadedFlag = true
                return setRadius(getCircleSizes().med, d)
             }
             if (JSON.stringify(d).toLowerCase().includes(search.toLowerCase())) {
@@ -422,6 +425,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
     }
     function fadeOut(d, circle, completion) {
       var element = document.getElementById("bubble-menu");
+      var search = document.getElementById("search-input");
       var opacity = FadedFlag ? 1 : 1;
       function executeFading() {
           var timer = setInterval(function() {
@@ -430,6 +434,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                 if (opacity >= 0.75) {
                   clearInterval(timer);
                   element.style.visibility = "visible";
+                  search.style.visibility = "visible";
                   opacity = 1
                   FadedFlag = false;
                   NotBlocked = true
@@ -439,11 +444,12 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             } else {
                 if (opacity <= 0.25) {
                   clearInterval(timer);
-                  element.style.visibility = "hidden";
+                  element.style.visibility = "hidden"
                   opacity = 0.15
                   FadedFlag = true;
                   NotBlocked = true
                 }
+                search.style.visibility = "hidden"
                 element.style.opacity = opacity;
                 opacity -= opacity * 0.25;
             }
