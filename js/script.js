@@ -422,7 +422,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
     }
     function fadeOut(d, circle, completion) {
       var element = document.getElementById("bubble-menu");
-      var opacity = FadedFlag ? 0.5: 1;
+      var opacity = FadedFlag ? 1 : 1;
       function executeFading() {
           var timer = setInterval(function() {
             NotBlocked = false
