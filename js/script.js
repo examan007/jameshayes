@@ -162,9 +162,18 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                  "height: " + position.height + "px;"
                  )
             search.addEventListener("keypress", function(event) {
+               if (event.key !== 'Enter') {
                 const thisvalue = this.value + event.key
                 console.log("Keypress event:", thisvalue);
                 showAllObjects(thisvalue)
+               }
+            });
+            search.addEventListener('keydown', function(event) {
+              if (event.key === 'Enter') {
+                const thisvalue = this.value
+                console.log("Keypress event:", thisvalue);
+                showAllObjects(thisvalue)
+              }
             });
             console.log("setting search position: x=[" + x + "] : " + JSON.stringify(position))
         } catch (e) {
