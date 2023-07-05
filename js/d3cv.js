@@ -19,6 +19,19 @@ d3Application = function (ready, updateRoles, updateTime) {
             return { min: 0, med: 68, max: 120 };
         }
     }
+    const search = document.getElementById('searchWrapper');
+    if (window.innerWidth < 600) {
+//        search.classList.add("narrowButton")
+        search.classList.add("wideButton")
+        console.log("narrow button class")
+    } else {
+        search.classList.add("wideButton")
+        console.log("wide button class")
+    }
+    document.getElementById('searchWrapper').addEventListener("click", function (event) {
+        console.log("Search clicked: [" + JSON.stringify(this) + "]")
+
+    })
   LogMgr = LoginManager().getData(
     "data/resume.json",
     (jsonData)=> {
@@ -42,6 +55,7 @@ d3Application = function (ready, updateRoles, updateTime) {
             { title: "Role", filter: "Title"  },
             { title: "Project", filter: "Project" },
             { title: "Technology", filter: "Technology" },
+            { title: "", filter: "Search" },
             ]
 
         function mapContinents(static_countinents) {
@@ -364,6 +378,7 @@ d3Application = function (ready, updateRoles, updateTime) {
 //            initializeResizing(d3module)
         })
     })
+
   return {
     status: 0,
     getMax: function () {

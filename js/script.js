@@ -92,6 +92,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
     }
     var continentKey = d3.select(".continent-key");
 
+
     if (true) { //showContinentKey) {
  //     translateContinentKey("translate(0," + (height - onScreenYOffset) + ")");
     } else {
@@ -99,7 +100,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
     }
 
     function createContinentKey() {
-      var keyWidth = keyElementWidth * continents.values().length;
+      var keyWidth = keyElementWidth * (continents.values().length);
       var continentKeyScale = d3.scaleBand()
         .domain(continents.values())
         .range([(width - keyWidth) / 2, (width + keyWidth) / 2]);
@@ -117,7 +118,15 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
           .attr("width", keyElementWidth)
           .attr("height", keyElementHeight)
           .attr("x", function(d) { return continentKeyScale(d); })
-          .attr("fill", function(d) { return continentColorScale(d); });
+          .attr("fill", function(d) {
+                console.log("key fill: " + JSON.stringify(d))
+                if (d == "SA") {
+                    console.log(JSON.stringify(d3.select(this)))
+                    return '#ffffff'
+                } else {
+                    return continentColorScale(d)
+                }
+          })
 
       d3.selectAll("g.continent-key-element")
         .append("text")
@@ -134,6 +143,34 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             var unneededTextHeight = 4;
             return ((keyElementHeight + textHeight) / 2) - unneededTextHeight;
           });
+        try {
+            const continents = d3.selectAll("g.continent-key")
+            const continentsArray = continents.nodes()
+            const element = continentsArray[continentsArray.length - 1]
+            console.log(element)
+            const array = element.children
+            const lastElement = array[array.length - 1]
+            const rect = lastElement.firstElementChild
+            console.log(rect)
+            const x = rect.getAttribute("x")
+            const position = rect.getBoundingClientRect()
+            const search = document.getElementById('search-input');
+            search.setAttribute("style",
+                "position: fixed;" +
+                 "left: " + position.left + "px;" +
+                 "width: " + position.width + "px;" +
+                 "height: " + position.height + "px;"
+                 )
+            search.addEventListener("keypress", function(event) {
+                const thisvalue = this.value + event.key
+                console.log("Keypress event:", thisvalue);
+                showAllObjects(thisvalue)
+            });
+            console.log("setting search position: x=[" + x + "] : " + JSON.stringify(position))
+        } catch (e) {
+            console.log(e.stack.toString())
+        }
+
     }
 
     function translateContinentKey(translation) {
@@ -323,6 +360,48 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             updateCircles()
         })
     }
+    var timerobj = null
+    function showAllObjects(search) {
+        const activeobjects = []
+        const circles = svg.selectAll("circle")
+        .attr("r", function(d) {
+            const element = d3.select(this)
+            function select() {
+               element.style("visibility", "visible")
+               element.style("display", "block")
+               return setRadius(getCircleSizes().med, d)
+            }
+            if (JSON.stringify(d).toLowerCase().includes(search.toLowerCase())) {
+                console.log(JSON.stringify(d))
+                return select()
+            } else {
+                element.style("visibility", "hidden")
+                element.style("display", "none")
+               return setRadius(getCircleSizes().min, d)
+            }
+        })
+        if (timerobj != null) {
+            window.clearTimeout(timerobj)
+        }
+        timerobj = window.setTimeout(function () {
+           createForceSimulation()
+           updateCircles()
+        }, 1000)
+    }
+    function showAllTest() {
+        circles.each(function (d) {
+            if (JSON.stringify(d).toLowerCase().includes(search.toLowerCase())) {
+                //activeobjects.push(d)
+                //console.log(JSON.stringify(d))
+            }
+        })
+        .on('end', function (d) {
+            console.log("End: " + JSON.stringify(d))
+        })
+        window.setTimeout(function () {
+              console.log("end: " + JSON.stringify(activeobjects))
+        }, 500)
+   }
     var FadedFlag = false
     var NotBlocked = true
     var CurrentCountryContext = {

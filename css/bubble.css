@@ -31,3 +31,15 @@ svg g.x-axis g.tick text {
 #controls {
   display: none;
 }
+#searchWrapper {
+    font-size: 1.25em;
+    position: fixed;
+    z-index: 10000;
+}
+.narrowButton {
+}
+.wideButton {
+        margin-top: 0;
+        position: fixed;
+        top: 0;
+}

@@ -38,6 +38,9 @@ circle {
 .continent-key-element text {
   fill: white;
 }
+.continent-key {
+    margin-right: 2em;
+}
 
 #bubble-chart {
     position: absolute;
