@@ -5,7 +5,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
      getDescription,
      updateTime
      ) {
-    var console = {
+    var consolex = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -424,8 +424,8 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
         }
     }
     function fadeOut(d, circle, completion) {
-      var element = document.getElementById("bubble-menu");
-      var search = document.getElementById("search-input");
+      const element = document.getElementById("bubble-menu");
+      const search = document.getElementById("search-input");
       var opacity = FadedFlag ? 1 : 1;
       function executeFading() {
           var timer = setInterval(function() {
@@ -455,18 +455,25 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             }
           }, 250);
       }
+      function executeFadingCondition() {
+          const curradius = Number(circle.attr("r"))
+          if (curradius !== getCircleSizes().max) {
+            FadedFlag = true
+          }
+          executeFading()
+
+      }
       if (NotBlocked == true)
       if (CurrentCountryContext.data.CountryName === d.CountryName) {
          CurrentCountryContext.circle = circle
          CurrentCountryContext.data = d
-         executeFading()
+         executeFadingCondition()
       } else
       if (FadedFlag == false) {
          CurrentCountryContext.circle = circle
          CurrentCountryContext.data = d
-         completion(d, circle)
       } else {
-         executeFading()
+         executeFadingCondition()
       }
       console.log("completion(" + JSON.stringify(CurrentCountryContext.data) + ") [" + JSON.stringify(d) + "]")
       completion(CurrentCountryContext.data, CurrentCountryContext.circle)
