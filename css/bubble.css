@@ -13,7 +13,6 @@ body {
 }
 text.label {
     display: none;
-    color: #FFFFFF;
     font-size: 10px;
     max-width: 10px;
     word-wrap: break-word;

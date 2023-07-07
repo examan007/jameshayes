@@ -536,6 +536,8 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
 
                 })
                 .attr('alignment-baseline', 'middle')
+                .style("font-family", "'Didot', 'Bodoni', 'Trajan', 'Garamond', 'Copperplate Gothic', serif")
+                .style("fill", "white");
             if (!exitflag) {
                 addText(index + 1)
             }
