@@ -144,6 +144,15 @@ TimelineApplication = function () {
       }
     return {
         Objects: {},
+        toggleTimeline: function (flag) {
+            if (flag) {
+                d3.selectAll('.timeline')
+                .style("display", "block")
+            } else {
+                d3.selectAll('.timeline')
+                .style("display", "none")
+            }
+        },
         createTimeline: function (scale, newupdateRole) {
           updateRole = newupdateRole
           this.Scale = scale

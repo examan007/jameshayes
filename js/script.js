@@ -3,7 +3,8 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
      testExperience,
      updateRoles,
      getDescription,
-     updateTime
+     updateTime,
+     toggleTimeline
      ) {
     var console = {
         log: function(msg) {},
@@ -253,7 +254,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                 window.setTimeout(function () {
                       console.log("end")
                       updateRoles(activeroles, '#1f77b4', true, getCircleSizes().max)
-                }, 1000)
+                }, 500)
             }
             function getAllRoleObjects(tech) {
                 const activeroles = []
@@ -287,7 +288,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                     window.setTimeout(function () {
                           console.log("end")
                           updateRoles(activeroles, '#d62728', true, getCircleSizes().max)
-                    }, 1000)
+                    }, 500)
                 }
             }
             function maximize() {
@@ -368,6 +369,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             }
            createForceSimulation()
             updateCircles()
+            toggleTimeline("true")
         })
     }
     var timerobj = null
@@ -398,6 +400,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
         timerobj = window.setTimeout(function () {
            createForceSimulation()
            updateCircles()
+           toggleTimeline(false)
         }, 1000)
     }
     function showAllTest() {

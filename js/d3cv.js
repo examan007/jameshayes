@@ -1,4 +1,4 @@
-d3Application = function (ready, updateRoles, updateTime) {
+d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
     const ThisApp = this
     var console = {
         log: function(msg) {},
@@ -366,7 +366,8 @@ d3Application = function (ready, updateRoles, updateTime) {
                 (roleid, event)=> {
                     console.log("updateTime()")
                     updateTime(roleid, event)
-                }
+                },
+                toggleTimeline
             )
             window.setTimeout( function () {
                 ready(ThisApp)
