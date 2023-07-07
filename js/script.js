@@ -5,7 +5,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
      getDescription,
      updateTime
      ) {
-    var consolex = {
+    var console = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -473,7 +473,11 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
          CurrentCountryContext.circle = circle
          CurrentCountryContext.data = d
       } else {
-         executeFadingCondition()
+          if (CurrentCountryContext.circle == null) {
+             CurrentCountryContext.circle = circle
+             CurrentCountryContext.data = d
+          }
+          executeFadingCondition()
       }
       console.log("completion(" + JSON.stringify(CurrentCountryContext.data) + ") [" + JSON.stringify(d) + "]")
       completion(CurrentCountryContext.data, CurrentCountryContext.circle)
