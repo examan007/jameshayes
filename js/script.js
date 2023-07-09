@@ -320,6 +320,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                 return maximize()
             }
         }
+        toggleTimeline("true")
         const newradius = getNewRadius(curradius) //+ circleSize.max / 20)
         clickedCircle.attr("r", newradius.radius.toString())
         console.log(JSON.stringify(data))
@@ -369,7 +370,6 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             }
            createForceSimulation()
             updateCircles()
-            toggleTimeline("true")
         })
     }
     var timerobj = null
@@ -381,7 +381,6 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             function select() {
                element.style("visibility", "visible")
                element.style("display", "block")
-               CurrentCountryContext.data.CountryName = d.CountryName
                FadedFlag = true
                return setRadius(getCircleSizes().med, d)
             }
@@ -466,25 +465,27 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
           executeFading()
 
       }
-      if (NotBlocked == true)
+      if (NotBlocked == false) {
+          completion(d, circle)
+      } else
       if (CurrentCountryContext.data.CountryName === d.CountryName) {
          CurrentCountryContext.circle = circle
          CurrentCountryContext.data = d
          executeFadingCondition()
+         completion(CurrentCountryContext.data, CurrentCountryContext.circle)
       } else
       if (FadedFlag == false) {
          CurrentCountryContext.circle = circle
          CurrentCountryContext.data = d
+         completion(CurrentCountryContext.data, CurrentCountryContext.circle)
       } else {
           if (CurrentCountryContext.circle == null) {
              CurrentCountryContext.circle = circle
              CurrentCountryContext.data = d
           }
           executeFadingCondition()
+          completion(d, circle)
       }
-      console.log("completion(" + JSON.stringify(CurrentCountryContext.data) + ") [" + JSON.stringify(d) + "]")
-      completion(CurrentCountryContext.data, CurrentCountryContext.circle)
-
     }
     function createCircles() {
         var formatPopulation = d3.format(",");
