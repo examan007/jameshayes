@@ -484,7 +484,9 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
              CurrentCountryContext.data = d
           }
           executeFadingCondition()
-          completion(d, circle)
+          if (!FadedFlag) {
+              completion(d, circle)
+          }
       }
     }
     function createCircles() {
