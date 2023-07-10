@@ -214,6 +214,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
   const DefaultMinRollCount = 24
   const DefaultMaxRollCount = 24
   var MaxRollCount = DefaultMinRollCount
+  var updatetimer = null
   function processClickCircle(data, clickedCircle) {
         const curradius = Number(clickedCircle.attr("r"))
         minimizeAllCircles()
@@ -251,7 +252,12 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                      console.log("end")
                      updateRoles(activeroles, '#1f77b4', true, getCircleSizes().max)
                 })
-                window.setTimeout(function () {
+                try {
+                    window.clearTimeout(updatetimer)
+                } catch (e) {
+                    console.log(e.toString())
+                }
+                updatetimer = window.setTimeout(function () {
                       console.log("end")
                       updateRoles(activeroles, '#1f77b4', true, getCircleSizes().max)
                 }, 500)
@@ -285,7 +291,12 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                          console.log("end")
                          updateRoles(activeroles, '#d62728', true, getCircleSizes().max)
                     })
-                    window.setTimeout(function () {
+                    try {
+                        window.clearTimeout(updatetimer)
+                    } catch (e) {
+                        console.log(e.toString())
+                    }
+                    updatetimer = window.setTimeout(function () {
                           console.log("end")
                           updateRoles(activeroles, '#d62728', true, getCircleSizes().max)
                     }, 500)
@@ -381,7 +392,6 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             function select() {
                element.style("visibility", "visible")
                element.style("display", "block")
-               FadedFlag = true
                return setRadius(getCircleSizes().med, d)
             }
             if (JSON.stringify(d).toLowerCase().includes(search.toLowerCase())) {
@@ -402,20 +412,6 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
            toggleTimeline(false)
         }, 1000)
     }
-    function showAllTest() {
-        circles.each(function (d) {
-            if (JSON.stringify(d).toLowerCase().includes(search.toLowerCase())) {
-                //activeobjects.push(d)
-                //console.log(JSON.stringify(d))
-            }
-        })
-        .on('end', function (d) {
-            console.log("End: " + JSON.stringify(d))
-        })
-        window.setTimeout(function () {
-              console.log("end: " + JSON.stringify(activeobjects))
-        }, 500)
-   }
     var FadedFlag = false
     var NotBlocked = true
     var CurrentCountryContext = {
@@ -505,6 +501,8 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
               if (d.ContinentCode === "AS") {
                   updateTime(d.CountryCode, "mouseover")
               }
+          } else {
+            console.log("Suppressed mouseover.")
           }
         })
         .on("mouseout", function(d) {
@@ -667,7 +665,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             }), 100)
         }
     }
-    window.setTimeout(()=> { adjustText(0) }, 500)
+    timerhandle = window.setTimeout(()=> { adjustText(0) }, 500)
   }
   function createForces() {
     var forceStrength = 0.05;
