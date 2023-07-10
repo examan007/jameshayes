@@ -453,21 +453,13 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
             }
           }, 250);
       }
-      function executeFadingCondition() {
-          const curradius = Number(circle.attr("r"))
-          if (curradius !== getCircleSizes().max) {
-            FadedFlag = true
-          }
-          executeFading()
-
-      }
       if (NotBlocked == false) {
           completion(d, circle)
       } else
       if (CurrentCountryContext.data.CountryName === d.CountryName) {
          CurrentCountryContext.circle = circle
          CurrentCountryContext.data = d
-         executeFadingCondition()
+         executeFading()
          completion(CurrentCountryContext.data, CurrentCountryContext.circle)
       } else
       if (FadedFlag == false) {
@@ -479,7 +471,7 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
              CurrentCountryContext.circle = circle
              CurrentCountryContext.data = d
           }
-          executeFadingCondition()
+          executeFading()
           if (!FadedFlag) {
               completion(d, circle)
           }
@@ -921,7 +913,10 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                 } else
                 if (event === "click") {
                     console.log(JSON.stringify(d))
-                    processClickCircle(d, d3.select(this))
+                    const circle = d3.select(this)
+                    CurrentCountryContext.circle = circle
+                    CurrentCountryContext.data = d
+                    processClickCircle(d, circle)
                 }
             }
         })
