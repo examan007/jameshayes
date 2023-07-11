@@ -1,4 +1,8 @@
 var ResumeOutput = function () {
+    var console = {
+        log: function(msg) {},
+        error: function(msg) {},
+    }
     const LogMgr = LoginManager().getData(
         "data/resume.json",
         (data)=> {
