@@ -1,0 +1,33 @@
+body {
+    margin: 5%;
+    font-family: Arial, sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #000000;
+}
+h2 {
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+.profile-name {
+    display: none;
+}
+#json-container :first-child a.profile-value {
+    font-family: Calibri, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+a.profile-value {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 40%;r
+    font-size: 18px;
+}
+.content-value {
+    margin: 0;
+}
+.content-element {
+    margin: 0;
+}
+

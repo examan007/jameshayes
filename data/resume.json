@@ -1,7 +1,24 @@
 {
-  "name": "James Hayes",
-  "phone": "416-575-7301",
-  "email": "james.hayes@neolation.com",
+  "name": {
+      "link": "https://examan007.github.io/jameshayes/",
+      "text": "James Hayes"
+  },
+  "phone": {
+      "link": "tel:416-575-7301",
+      "text": "416-575-7301"
+  },
+  "email": {
+      "link": "mailto:james.hayes@neolation.com",
+      "text" : "james.hayes@neolation.com"
+  },
+  "linkedin": {
+      "link": "https://linkedin.com/in/james-hayes-0a287031/",
+      "text": "linkedin.com/in/james-hayes-0a287031/"
+  },
+  "github": {
+      "link": "https://github.com/examan007",
+      "text": "github.com/examan007"
+  },
   "summary": [
     "The latest revolution in Artificial Intelligence (AI) and Language Models (LM), such as OpenAI's GPT-3.5, has transformed the landscape of information accessibility. With this technological advancement, all known answers are now within reach, reshaping the way we approach problem-solving. As an experienced software developer, I possess a wealth of know-how and expertise that enables me to navigate this new realm effectively.",
     "My ability to ask the right questions for AI systems to provide accurate and valuable answers has become a vital asset. Importantly, given the human-like error prone nature of AI, there must be automatic programmatic cross-checking in place before any process is ready for a critical mission. I am well-versed in harnessing the power of computing to enhance productivity, streamline processes, and deliver innovative solutions. My proficiency in programming languages and software development frameworks empowers me to leverage the potential of AI to its fullest.",
@@ -223,5 +240,9 @@
         "Develop and benchmark storage subsystems on Netware with SNMP proxy and RS-232 driver."
       ]
     }
-  ]
+  ],
+  "education": {
+      "institution": "Toronto Metropolitan University (formally Ryerson Polytechnic)",
+      "program": "Electrical Engineering Technology – computer software stream"
+  }
 }

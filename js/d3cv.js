@@ -86,8 +86,8 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
                     if (filter_code != null)
                     if (filter_code === "Profile") {
                         newarray.push({
-                            "CountryName":jsonData.name,
-                            "CountryCode":jsonData.email,
+                            "CountryName":jsonData.name.text,
+                            "CountryCode":jsonData.email.text,
                             "ContinentCode": continent_code,
                             "CenterLongitude": "",
                             "CenterLatitude": 0,
