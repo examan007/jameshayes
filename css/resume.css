@@ -28,6 +28,7 @@ a.profile-value {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 30%;
+    white-space: nowrap;
 }
 .profile-content :first-child {
     margin: 0;
@@ -87,11 +88,11 @@ a.profile-value {
 
 .top-right-button {
   border-radius: 100px;
-  padding: 10px;
+  padding: 5px;
   position: fixed;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5em;
+  top: 5px;
+  right: 5px;
+  font-size: 1.25em;
   background-color: rgba(255, 255, 255, 0);
   font-weight: bold;
 }
