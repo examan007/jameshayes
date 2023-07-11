@@ -9,20 +9,24 @@ a {
 h2 {
     margin-top: 5px;
     margin-bottom: 5px;
+    font-size: 1em;
 }
 .profile-name {
     display: none;
 }
 #json-container :first-child a.profile-value {
     font-family: Calibri, sans-serif;
-    font-size: 28px;
+    font-size: 1.5em;
     font-weight: bold;
+}
+#json-container div {
+    margin: 0;
+    font-size: 0.95em;
 }
 a.profile-value {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 30%;
-    font-size: 18px;
 }
 .profile-content :first-child {
     margin: 0;
@@ -34,5 +38,58 @@ a.profile-value {
 }
 .content-element {
     margin: 0;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  align-content: space-between;
+  margin-bottom: 5px;
+}
+.flex-container :first-child {
+    font-style: italic;
+}
+.flex-container :nth-child(3) {
+    font-weight: bold;
+}
+.column {
+  margin-top: 0;
+}
+.column:first-child {
+  margin-top: 0;
+}
+.column:last-child {
+  margin-bottom: 0;
+}
+.column.span-fit {
+    margin: 0;
+}
+.content-value {
+}
+
+.span-right {
+  margin-top: 10px;
+}
+
+.span-fit {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  position: fixed;
+}
+
+.top-right-button {
+  border-radius: 100px;
+  padding: 10px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5em;
+  background-color: rgba(255, 255, 255, 0);
+  font-weight: bold;
 }
 

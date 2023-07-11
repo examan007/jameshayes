@@ -42,23 +42,40 @@ var ResumeOutput = function () {
                             const array = data[key]
                             array.forEach(exper => {
                                 var count = 0
+                                const itemFlexElement = document.createElement('div')
+                                itemFlexElement.classList.add('flex-container');
+                                itemElement.appendChild(itemFlexElement);
                                 Object.keys(exper).forEach(name => {
-                                function createElement() {
-                                    if (count < 4) {
-                                        return document.createElement('span')
-                                    } else {
-                                        return document.createElement('div')
+                                    const ivalue = exper[name]
+                                    const itemExElement = document.createElement('div')
+                                    function getElement() {
+                                        if (count < 3) {
+                                            itemExElement.classList.add('column');
+                                            itemFlexElement.appendChild(itemExElement);
+                                          itemExElement.innerHTML = `
+                                            <span class="profile-name">${name}</span>
+                                            <p class="span-fit" wrap="wrap">${ivalue}</p>
+                                            `
+                                        } else
+                                        if (count < 4) {
+                                            itemExElement.classList.add('column');
+                                            itemFlexElement.appendChild(itemExElement);
+                                          itemExElement.innerHTML = `
+                                            <span class="span-right profile-name">${name}</span>
+                                            <p class="span-fit" wrap="wrap">${ivalue}</p>
+                                            `
+                                        itemFlexElement.appendChild(itemExElement)
+                                        } else {
+                                            itemExElement.classList.add('experience-content');
+                                            itemElement.appendChild(itemExElement);
+                                          itemExElement.innerHTML = `
+                                            <span class="profile-name">${name}</span>
+                                            <div class="content-element">${ivalue}</div>
+                                            `
+                                        }
                                     }
-                                }
-                                const itemExElement = createElement()
-                                  const ivalue = exper[name]
-                                  //console.log(name + " [" + ivalue + "]")
-                                  itemExElement.innerHTML = `
-                                    <span class="profile-name">${name}</span>
-                                    <span class="content-element">${ivalue}</span>
-                                    `
-                                  itemElement.appendChild(itemExElement);
-                                count += 1
+                                    getElement()
+                                    count += 1
                                 })
                                const endElement = document.createElement('br');
                                itemElement.appendChild(endElement);
@@ -109,6 +126,16 @@ var ResumeOutput = function () {
                 console.log(e.toString())
             }
         })
+        if (typeof window.print === 'function') {
+            var printButton = document.getElementById('print-button');
+            printButton.addEventListener('click', function() {
+              this.setAttribute("style", "display: none")
+              window.print();
+              this.setAttribute("style", "display: block")
+            });
+        } else {
+            console.log("No print button.")
+        }
     return {
         status: 0
     }
