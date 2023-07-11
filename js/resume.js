@@ -141,10 +141,12 @@ var ResumeOutput = function () {
             var printButton = document.getElementById('print-button');
             printButton.addEventListener('click', function() {
               this.setAttribute("style", "visibility: hidden")
-              window.print();
               window.setTimeout(()=> {
-                  this.setAttribute("style", "visibility: visible")
-              }, 3000)
+                  window.print();
+                  window.setTimeout(()=> {
+                      this.setAttribute("style", "visibility: visible")
+                  }, 3000)
+              }, 1000)
             });
         } else {
             console.log("No print button.")
