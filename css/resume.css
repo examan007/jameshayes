@@ -1,6 +1,7 @@
 body {
     margin: 5%;
     font-family: Arial, sans-serif;
+    max-width: 960px;
 }
 a {
   text-decoration: none;
