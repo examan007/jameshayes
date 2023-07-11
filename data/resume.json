@@ -32,9 +32,10 @@
       "title": "Freelance Developer",
       "dates": "Apr’23-Jul'23",
       "responsibilities": [
-        "Created an interactive resume CV as a data driven document template using d3.js and SVG elements.",
+        "Design and create an interactive resume CV as a data driven document template using d3.js and SVG elements.",
         "Application of full stack technology supporting web services including appointment booking using MongoDB, node.js, express.js, Nginx, Docker CE, GitHub Pages, HTML, CSS, and Javascript. JWT with nodemail.js verification.",
-        "Utilizing various public CDN resources, open-source components, and a low-cost high availability architecture."
+        "Utilizing various public CDN resources, open-source components, and a low-cost high availability architecture.",
+        "Deployed Kubernetes cluster onto Ubuntu VMs using Terraform including Helmchart as an application prototype"
       ]
     },
     {
@@ -45,7 +46,7 @@
       "responsibilities": [
         "Lead team in regard to deployed technologies involving up to seven analysts in Devops, QA and Operations.",
         "Azure and AWS deployment of Spark/Yarn/Hadoop with REST, Kafka, Postgresql, Spring Boot, and Node (NextJs).",
-        "Responsible for development support and maintenance of the product delivery pipeline and micro services (Helm-like).",
+        "Responsible for design, development and maintenance of the product delivery pipeline and micro services architecture.",
         "Business plan product definition and high-level architecture was translated into requirements and disseminated (APIM).",
         "Involved with design and prototyping of a proprietary OAuth2 securing Kafka channel; PKI, x.509, TLS/SSL",
         "Technologies: Jenkins, Maven, Java 8, JDBC, BASH, PowerShell, Python, Scala, Javascript, Git, Jira, Artifactory",
@@ -59,12 +60,12 @@
       "dates": "May'18-Feb’22",
       "responsibilities": [
         "Implemented a continuous automated unattended software delivery system using BASH and Python in a Terraform equivalent approach and using Ansible. Used standard Git workflow in practicing an Agile software change process.",
-        "Created a packaging framework on AWS enabling delivery of various components in various custom configurations.",
+        "Designed a packaging framework on AWS enabling delivery of various components in various custom configurations.",
         "Deliver from the pipeline based on building in a container including escrow image retention and third-party verification.",
         "Developed and tested REST API with low latency, high concurrency, and scaled performance e.g.150 req/sec",
         "Integrated hardware cryptography security module using Opencryptoki (C/C++) and z/OS (HSM) as a key vault.",
-        "Created automated configuration using AWS/EC2 supporting TLS/SSL for all component communications channels.",
-        "Developed a format-preserving encryption (FPE) module in Scala/Java using open-source libraries."
+        "Designed automated configuration using AWS/EC2 supporting TLS/SSL for all component communications channels.",
+        "Designed and developed a format-preserving encryption (FPE) module in Scala/Java using open-source libraries."
       ]
     },
     {
