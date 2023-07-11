@@ -145,8 +145,8 @@ var ResumeOutput = function () {
                   window.print();
                   window.setTimeout(()=> {
                       this.setAttribute("style", "visibility: visible")
-                  }, 3000)
-              }, 1000)
+                  }, 100)
+              }, 100)
             });
         } else {
             console.log("No print button.")
