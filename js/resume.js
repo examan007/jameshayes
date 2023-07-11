@@ -13,7 +13,7 @@ var ResumeOutput = function () {
                    if (key === "summary") {
                       itemElement.innerHTML = `
                         <span class="profile-name">${key}</span>
-                        <h2>Summary:</h2>
+                        <h1>Summary:</h1>
                         <div class="profile-content">
                         <p class="content-value">${value[0]}</p>
                         <p class="content-value">${value[1]}</p>
@@ -25,7 +25,7 @@ var ResumeOutput = function () {
                    if (key === "objective") {
                       itemElement.innerHTML = `
                         <span class="profile-name">${key}</span>
-                        <h2>Objective:</h2>
+                        <h1>Objective:</h1>
                         <div class="profile-content">
                         <p class="content-value">${value}</p>
                         </div>
@@ -35,7 +35,7 @@ var ResumeOutput = function () {
                    if (key === "experience") {
                       itemElement.innerHTML = `
                         <span class="profile-name">${key}</span>
-                        <h2>Experience:</h2>
+                        <h1>Experience:</h1>
                          `
                         jsonContainer.appendChild(itemElement);
                         try {
@@ -94,7 +94,7 @@ var ResumeOutput = function () {
                    if (key === "education") {
                       itemElement.innerHTML = `
                         <span class="profile-name">${key}</span>
-                        <h2>Education:</h2>
+                        <h1>Education:</h1>
                          `
                         jsonContainer.appendChild(itemElement);
                         try {
