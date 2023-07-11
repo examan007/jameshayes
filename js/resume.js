@@ -14,9 +14,11 @@ var ResumeOutput = function () {
                       itemElement.innerHTML = `
                         <span class="profile-name">${key}</span>
                         <h2>Summary:</h2>
+                        <div class="profile-content">
                         <p class="content-value">${value[0]}</p>
                         <p class="content-value">${value[1]}</p>
                         <p class="content-value">${value[2]}</p>
+                        </div>
                     `
                       jsonContainer.appendChild(itemElement);
                    } else
@@ -24,7 +26,9 @@ var ResumeOutput = function () {
                       itemElement.innerHTML = `
                         <span class="profile-name">${key}</span>
                         <h2>Objective:</h2>
+                        <div class="profile-content">
                         <p class="content-value">${value}</p>
+                        </div>
                     `
                       jsonContainer.appendChild(itemElement);
                   } else
