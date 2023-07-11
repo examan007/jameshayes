@@ -64,14 +64,21 @@ var ResumeOutput = function () {
                                             <span class="span-right profile-name">${name}</span>
                                             <p class="span-fit" wrap="wrap">${ivalue}</p>
                                             `
-                                        itemFlexElement.appendChild(itemExElement)
-                                        } else {
-                                            itemExElement.classList.add('experience-content');
-                                            itemElement.appendChild(itemExElement);
-                                          itemExElement.innerHTML = `
-                                            <span class="profile-name">${name}</span>
-                                            <div class="content-element">${ivalue}</div>
+                                        } else
+                                        if (name === "responsibilities") {
+                                            itemElement.appendChild(itemExElement)
+                                            const array = ivalue
+                                            console.log(JSON.stringify(array))
+                                            array.forEach(element => {
+                                            const itemContentElement = document.createElement('span')
+                                            itemContentElement.classList.add('experience-content');
+                                            itemExElement.appendChild(itemContentElement);
+                                            itemContentElement.innerHTML = `
+                                              <span class="profile-name">${name}</span>
+                                              <span class="content-element">${element}</span>
                                             `
+                                            })
+
                                         }
                                     }
                                     getElement()

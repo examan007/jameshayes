@@ -1,5 +1,6 @@
 body {
     margin: 5%;
+    margin-top: 2px;
     font-family: Arial, sans-serif;
 }
 a {
@@ -17,11 +18,11 @@ h2 {
 #json-container :first-child a.profile-value {
     font-family: Calibri, sans-serif;
     font-size: 1.5em;
-    font-weight: bold;
+    font-weight: 900;
 }
 #json-container div {
     margin: 0;
-    font-size: 0.95em;
+    font-size: 0.925em;
 }
 a.profile-value {
     margin-top: 0;
@@ -50,9 +51,11 @@ a.profile-value {
 }
 .flex-container :first-child {
     font-style: italic;
+    font-weight: 750;
+    font-size: 0.95em;
 }
 .flex-container :nth-child(3) {
-    font-weight: bold;
+    font-weight: 900;
 }
 .column {
   margin-top: 0;
