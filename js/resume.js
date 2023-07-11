@@ -140,9 +140,9 @@ var ResumeOutput = function () {
         if (typeof window.print === 'function') {
             var printButton = document.getElementById('print-button');
             printButton.addEventListener('click', function() {
-              this.setAttribute("style", "display: none")
+              this.setAttribute("style", "visibility: hidden")
               window.print();
-              this.setAttribute("style", "display: block")
+              this.setAttribute("style", "visibility: visible")
             });
         } else {
             console.log("No print button.")
