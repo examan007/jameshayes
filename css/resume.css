@@ -21,6 +21,7 @@ h1 {
     margin-bottom: 5px;
     font-size: 1em;
     font-weight: 750;
+    text-transform: uppercase;
 }
 .profile-name {
     display: none;

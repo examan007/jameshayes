@@ -34,8 +34,7 @@
       "responsibilities": [
         "Design and create an interactive resume CV as a data driven document template using d3.js and SVG elements.",
         "Application of full stack technology supporting web services including appointment booking using MongoDB, node.js, express.js, Nginx, Docker CE, GitHub Pages, HTML, CSS, and Javascript. JWT with nodemail.js verification.",
-        "Utilizing various public CDN resources, open-source components, and a low-cost high availability architecture.",
-        "Deployed Kubernetes cluster onto Ubuntu VMs using Terraform including Helmchart as an application prototype"
+        "Utilizing various public CDN resources, open-source components, and a low-cost high availability architecture."
       ]
     },
     {
@@ -54,8 +53,8 @@
       ]
     },
     {
-      "company": "Datapassports",
-      "location": "Toronto, ON  (formerly Schedule1 Inc.)",
+      "company": "Datapassports (formerly Schedule1 Inc.)",
+      "location": "Toronto, ON",
       "title": "Devops/Software Developer",
       "dates": "May'18-Feb’22",
       "responsibilities": [
@@ -140,7 +139,7 @@
       ]
     },
     {
-      "company": "Beta Systems Software of Canada (Traded with Proginet Corp.)",
+      "company": "Beta Systems Software of Canada (Acquired Blockade assets from Proginet)",
       "location": "Toronto, ON",
       "title": "Software Security Engineering",
       "dates": "Jan ’09-Apr ‘11",
