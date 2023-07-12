@@ -1,7 +1,16 @@
+@font-face {
+  font-family: 'New Times Roman';
+  src: url('../fonts/VIPRoman-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Libre Baskeville';
+  src: url('../fonts/libre-baskerville-font/LibreBaskerville-DpdE.ttf') format('truetype');
+}
 body {
     margin: 5%;
     margin-top: 2px;
-    font-family: Arial, sans-serif;
+    font-family: 'Libre Baskeville', serif;
+    font-weight: 500;
 }
 a {
   text-decoration: none;
@@ -11,12 +20,12 @@ h1 {
     margin-top: 5px;
     margin-bottom: 5px;
     font-size: 1em;
+    font-weight: 750;
 }
 .profile-name {
     display: none;
 }
 #json-container :first-child a.profile-value {
-    font-family: Calibri, sans-serif;
     font-size: 1.5em;
     font-weight: 900;
 }
@@ -94,6 +103,7 @@ a.profile-value {
   right: 5px;
   font-size: 1.25em;
   background-color: rgba(255, 255, 255, 0);
-  font-weight: bold;
+  font-weight: 900;
+  font-family: 'Libre Baskeville', serif;
 }
 
