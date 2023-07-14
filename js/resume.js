@@ -138,19 +138,55 @@ var ResumeOutput = function () {
             }
         })
         if (typeof window.print === 'function') {
-            var printButton = document.getElementById('print-button');
-            printButton.addEventListener('click', function() {
-              this.setAttribute("style", "visibility: hidden")
+            registerEvents(document.getElementById('print-button'), (element)=> {
+              element.parentNode.setAttribute("style", "visibility: hidden")
               window.setTimeout(()=> {
-                  window.print();
+                 window.print();
                   window.setTimeout(()=> {
-                      this.setAttribute("style", "visibility: visible")
+                     element.parentNode.setAttribute("style", "visibility: visible")
                   }, 100)
               }, 100)
-            });
+            })
         } else {
             console.log("No print button.")
         }
+        function scaleEm(element, scalingFactor) {
+            //const element = document.getElementById(elementId);
+            const computedFontSize = window.getComputedStyle(element).fontSize;
+            const fontSizeValue = parseFloat(computedFontSize);
+            const scaledValue = fontSizeValue * scalingFactor;
+            element.style.fontSize = scaledValue + "px";
+        }
+        function adjustTextScale(callback) {
+            const elementsWithFontSize = document.querySelectorAll('#json-container div');
+            elementsWithFontSize.forEach(element => {
+                callback(element)
+            });
+        }
+        function registerEvents(element, clickMethod) {
+            element.addEventListener("click", function(event) {
+                 clickMethod(element)
+            })
+            element.addEventListener("mouseover", function(event) {
+                  element.classList.add("scale-selected")
+            })
+            element.addEventListener("mouseout", function(event) {
+                  element.classList.remove("scale-selected")
+            })
+        }
+        registerEvents(document.getElementById("scale-up-print"), (element)=> {
+            console.log("Up: " + element)
+            adjustTextScale((element)=> {
+                scaleEm(element, 1.01)
+            })
+        })
+        registerEvents(document.getElementById("scale-down-print"), (element)=> {
+            console.log("Up: " + element)
+            adjustTextScale((element)=> {
+                scaleEm(element, 0.99)
+            })
+        })
+
     return {
         status: 0
     }
