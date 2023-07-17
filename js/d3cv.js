@@ -95,17 +95,22 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
                         })
                     } else
                     if (filter_code === "Technology") {
+                        function doesNotContain(value) {
+                            return newarray.find(item => item["CountryName"] === value) == null
+                        }
                         function addTech(index) {
                             const tech = technology[index]
                             if (typeof(tech) !== 'undefined') {
-                                newarray.push({
-                                    "CountryName": tech,
-                                    "CountryCode": tech,
-                                    "ContinentCode": continent_code,
-                                    "CenterLongitude": "",
-                                    "CenterLatitude":  0,
-                                    "Population": 10000
-                                })
+                                if (doesNotContain(tech)) {
+                                    newarray.push({
+                                        "CountryName": tech,
+                                        "CountryCode": tech,
+                                        "ContinentCode": continent_code,
+                                        "CenterLongitude": "",
+                                        "CenterLatitude":  0,
+                                        "Population": 10000
+                                    })
+                                }
                                 addTech(index + 1)
                             }
                         }
