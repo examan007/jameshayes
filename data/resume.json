@@ -35,6 +35,22 @@
         "Design and create an interactive resume CV as a data driven document template using d3.js and SVG elements.",
         "Application of full stack technology supporting web services including appointment booking using MongoDB, node.js, express.js, Nginx, Docker CE, GitHub Pages, HTML, CSS, and Javascript. JWT with nodemail.js verification.",
         "Utilizing various public CDN resources, open-source components, and a low-cost high availability architecture."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://illuminatinglaserandstyle.com"
+        },
+        {
+          "key": "responsibilities",
+          "index": "0",
+          "link": "https://examan007.github.io/jameshayes/"
+        },
+        {
+          "key": "responsibilities",
+          "index": "1",
+          "link": "https://illuminatinglaserandstyle.com"
+        }
       ]
     },
     {
@@ -50,7 +66,13 @@
         "Involved with design and prototyping of a proprietary OAuth2 securing Kafka channel; PKI, x.509, TLS/SSL",
         "Technologies: Jenkins, Maven, Java 8, JDBC, BASH, PowerShell, Python, Scala, Javascript, Git, Jira, Artifactory",
         "Docker CE and swarm network using RHEL UBI containers, using Kubernetes investigated e.g. OpenShift, AKS"
-      ]
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://datapassports.com"
+        }
+        ]
     },
     {
       "company": "Datapassports (formerly Schedule1 Inc.)",
@@ -65,6 +87,12 @@
         "Integrated hardware cryptography security module using Opencryptoki (C/C++) and z/OS (HSM) as a key vault.",
         "Designed automated configuration using AWS/EC2 supporting TLS/SSL for all component communications channels.",
         "Designed and developed a format-preserving encryption (FPE) module in Scala/Java using open-source libraries."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://datapassports.com"
+        }
       ]
     },
     {
@@ -77,6 +105,12 @@
         "A mobile computer application that schedules service bookings is designed and built prototype as single page.",
         "Developed web application with a meAN stack i.e. AngularJS, NodeJS, Nginx, NoSQL as JSON files.",
         "Functional programming design and techniques are applied; secure web services are created."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://neolation.com"
+        }
       ]
     },
     {
@@ -89,6 +123,12 @@
         "Utilize a full stack architecture with a JavaScript/JQuery component addressing model concern in browser.",
         "Design and implement deployment processes involving Jira, GIT, MS SQL, Apache, and PHP.",
         "Environment was Agile experience with daily scrums, weekly sprints, and epic project definitions."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://telus.com"
+        }
       ]
     },
     {
@@ -102,6 +142,12 @@
         "Media asset bundles required conversion and packaging to be deployed with the application using Python and .Net C#",
         "Technologies included XMLEncoder, JAXB, and gson fulfilled requirements producing artifacts and documentation e.g. schemagen for XML schema (xsd) and Doxygen. Supported and maintained JBoss-based content server.",
         "Other tools used are Jira, Confluence, GitHub, Subversion (svn), Eclipse, AWS, VirtualBox, Python"
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://comqi.com"
+        }
       ]
     },
     {
@@ -113,6 +159,12 @@
         "An upgrade of the Automated Line Control system to a new version running on Redhat Linux with PostgreSQL from HP-UX with Oracle was successfully performed as a contracted member of the systems engineering group providing systems-level support and required program development. Redhat GFS2, 3PAR storage server, and hosted by VMware.",
         "Delivered several critical programs into a near continuous production system including a build and deploy framework supporting bash scripts and C/C++ programs using STL with Subversion.",
         "Built a web Andon; this is a visualization of the status from the various system components and based on cross-domain JQuery and JSON formatted responses. Governed execution of system scripts is provided to many users by a management program that integrates to Apache and any generic HTTP server as a CGI program providing RESTful API web service. Angular JS was being considered a shop standard."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://tmmc.ca/en/"
+        }
       ]
     },
     {
@@ -125,6 +177,12 @@
         "Existing code and production infrastructure were reused in developing installation programs for multiple UNIX, Linux, and Windows platforms. (bash, WIX). Used Microsoft Visual Studio and .NET Framework 4.5 and conversion from v3.",
         "Agile training was undertaken.",
         "Technologies included CVS, Perforce, Bugzilla, Review Board, Jenkins, Coverity, SAP with Oracle, DB2, MySQL, and SQLite. Also, HTML, CSS, XML, XSL, REST API, JSON, Javascript, some testing with Cassandra"
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://www.dell.com/en-us/blog/tags/dell-emc/"
+        }
       ]
     },
     {
@@ -136,6 +194,12 @@
         "Industrial-grade sensor devices with management GUI programs were developed. Responsibilities comprised a team lead role providing design documentation and API definition conforming to an MVC architecture pattern. Additionally task definition, scheduling, and mentoring were undertaken. (PMLC)",
         "Achievements included creation of a portable C/C++ library based on existing proven functions with a Java API using JNI. This supported projects running on Linux, Windows, QNX, and Xilinx Microblaze.",
         "Accomplished enhancements to interrupt processing and thread signaling functions to increase performance handling asynchronous event processing and data uploading. This is a real-time embedded application involving Modbus, TCP/IP, and proprietary configuration management."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://kelk.com/"
+        }
       ]
     },
     {
@@ -147,6 +211,12 @@
         "Program installed on a Windows client with invocation methods bound to service or credential provider event functions. Communications utilized an HTTP proxy. Security was provided using OpenSSL and PKI.",
         "Responsibilities included maintenance of security product lines providing authentication, authorization, and password management that were acquired by an asset trade with Proginet or purchase from Blockade",
         "Product enhancements were accomplished over two major releases. This involved port across multiple platforms including Linux, UNIX, z/OS, and Windows. Additional technologies include MFC, MSI, WIX, Perforce, SAP, OpenLDAP, AD, MS SQL, IIS, Javascript, HTML, CSS, XML, XSL, Javascript, SDLC."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://www.betasystems.com/en/"
+        }
       ]
     },
     {
@@ -158,6 +228,12 @@
         "SaaS product providing a web application to manage email attachments was developed as a major contributor. Essentially the send functionality of an email application was required, including resolution of the recipients' list gained by a database query given a “to/cc/bcc” field entry.",
         "Implementation required HTTP encode and decode, including MIME content handling. Technologies included mySQL, AJAX, Javascript, Java, J2EE, Servlets, Struts, JDBC, Apache Tomcat, REST API",
         "Secure communications hub running on z/OS UNIX System Services was maintained and enhanced, including several critical bug fixes. This provides an HTTP, RADIUS, and TACACS+ server. Configuration management and synchronization transactions are handled by proprietary TCP and UDP messaging protocols. Additional technologies included SAP ABAP, Java, C/C++, SOAP"
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "#"
+        }
       ]
     },
     {
@@ -169,6 +245,12 @@
         "Social networking web application was supported in a highly available production environment while ongoing enhancements were developed, and new features researched.",
         "Accomplishments included the development of business reporting and analysis applications. An email notification program involving database query was designed, optimized, implemented, and installed into production.",
         "Technologies included C#, PHP, ASP.Net, SharePoint, MySQL, SMTP, ETL."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "#"
+        }
       ]
     },
     {
@@ -183,6 +265,12 @@
         "Legacy code set was converged by refactor and reuse of functions with portable C/C++ classes and API. An embedded JVM architecture was implemented with a generic JNI interface and modular design.",
         "Responsible for formal design documents involving UML, TogetherSoft, Visio, and XML schema.",
         "Experience gained with J2EE compliant application servers; WebLogic, WebSphere, Apache Tomcat."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "#"
+        }
       ]
     },
     {
@@ -194,6 +282,12 @@
         "Develop an enterprise portal facility and proprietary framework for self-help Internet service.",
         "Utilized C++, HTML, Javascript, OpenSSL, Sockets, WIN32, Pthreads, PKI, GCC, HTTP, TCP/IP.",
         "Code designed to port between POSIX operating systems such as Windows and Linux."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "#"
+        }
       ]
     },
     {
@@ -205,6 +299,12 @@
         "Transfer technology from the foreign office; Solaris, Apache HTTPd, Sybase, Voxware, H.323, and C++.",
         "Investigate and prototype a customer service portal application, Email, COM/DCOM, Java, CGI.",
         "Extend the implementation of an email application integrating with Outlook internally and SMTP externally."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "#"
+        }
       ]
     },
     {
@@ -218,6 +318,12 @@
         "Embedded implementation using Pharlap RTOS, WIN32, C++, Intel D100 Ethernet, and PC platform.",
         "Develop NDIS drivers for VPN client in Microsoft Windows NT/ 95/98 with encryption hardware.",
         "Implement virtual interface architecture providing IP tunneling with ARP, DHCP, and DNS protocols."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "#"
+        }
       ]
     },
     {
@@ -227,6 +333,12 @@
       "dates": "Dec ‘96-Mar ’97",
       "responsibilities": [
         "Interactive Voice Response (IVR) systems; voice recognition; using AIX, and telephony framework."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "https://www.ibm.com/ca-en"
+        }
       ]
     },
     {
@@ -239,6 +351,12 @@
         "Implement remote serviceability of data storage products using; VxWorks, C++, SLIP, FTP, TELNET.",
         "Embedded communications using Signetics I2C and SCSI technologies between hot-swap modules.",
         "Develop and benchmark storage subsystems on Netware with SNMP proxy and RS-232 driver."
+      ],
+      "links" : [
+        {
+          "key": "company",
+          "link": "#"
+        }
       ]
     }
   ],

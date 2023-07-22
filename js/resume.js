@@ -45,15 +45,56 @@ var ResumeOutput = function () {
                         try {
                             const array = data[key]
                             array.forEach(exper => {
+                                function getItemValue(rawvalue, key, offset) {
+                                    function getLink(index) {
+                                        try {
+                                            const element = exper.links[index]
+                                            console.log(JSON.stringify(element))
+                                            console.log("[" + element.key + "] [" + key + "]")
+                                            if (element.key === key) {
+                                                if (Number(offset) < 0) {
+                                                    return element.link
+                                                } else
+                                                if (Number(offset) == Number(element.index)) {
+                                                    return element.link
+                                                }
+                                            }
+                                            return getLink(index + 1)
+                                        } catch (e) {
+                                            console.log(e.toString())
+                                        }
+                                        return ""
+                                    }
+                                    const link = getLink(0)
+                                    console.log(
+                                    "raw=[" + rawvalue +
+                                     "] key=[" + key +
+                                      "] link=[" + link +
+                                       "] index=[" + offset +
+                                        "]")
+                                    if (link.length > 0) {
+                                        const retstr = `
+                                        <a href="${link}">${rawvalue}</a>
+                                            `
+                                        return retstr
+                                    } else {
+                                        return rawvalue
+                                    }
+                                }
+                                function getItemValueLog(rawvalue, key, index) {
+                                    const value = getItemValue(rawvalue, key, index)
+                                    console.log("value=[" + value + "]")
+                                    return value
+                                }
                                 var count = 0
                                 const itemFlexElement = document.createElement('div')
                                 itemFlexElement.classList.add('flex-container');
                                 itemElement.appendChild(itemFlexElement);
                                 Object.keys(exper).forEach(name => {
-                                    const ivalue = exper[name]
                                     const itemExElement = document.createElement('div')
                                     function getElement() {
                                         if (count < 3) {
+                                            const ivalue = getItemValueLog(exper[name], name, -1)
                                             itemExElement.classList.add('column');
                                             itemFlexElement.appendChild(itemExElement);
                                           itemExElement.innerHTML = `
@@ -62,6 +103,7 @@ var ResumeOutput = function () {
                                             `
                                         } else
                                         if (count < 4) {
+                                            const ivalue = getItemValueLog(exper[name], name, -1)
                                             itemExElement.classList.add('column');
                                             itemFlexElement.appendChild(itemExElement);
                                           itemExElement.innerHTML = `
@@ -71,16 +113,21 @@ var ResumeOutput = function () {
                                         } else
                                         if (name === "responsibilities") {
                                             itemElement.appendChild(itemExElement)
-                                            const array = ivalue
-                                            console.log(JSON.stringify(array))
-                                            array.forEach(element => {
-                                            const itemContentElement = document.createElement('span')
-                                            itemContentElement.classList.add('experience-content');
-                                            itemExElement.appendChild(itemContentElement);
-                                            itemContentElement.innerHTML = `
-                                              <span class="profile-name">${name}</span>
-                                              <span class="content-element">${element}</span>
-                                            `
+                                            const array = exper[name]
+                                            console.log("Array: " + JSON.stringify(array))
+                                            var index = 0
+                                            array.forEach((elementstr) => {
+                                                console.log("Element:")
+                                                console.log(elementstr)
+                                                const element = getItemValue(elementstr, "responsibilities", index )
+                                                index += 1
+                                                const itemContentElement = document.createElement('span')
+                                                itemContentElement.classList.add('experience-content');
+                                                itemExElement.appendChild(itemContentElement);
+                                                itemContentElement.innerHTML = `
+                                                  <span class="profile-name">${name}</span>
+                                                  <span class="content-element">${element}</span>
+                                                `
                                             })
 
                                         }
