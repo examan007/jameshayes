@@ -38,7 +38,8 @@
       ],
       "projects": [
         "Booking web app",
-        "Interactive resume CV"
+        "Interactive resume CV",
+        "Open source"
       ],
       "links" : [
         {
@@ -70,6 +71,11 @@
         "Involved with design and prototyping of a proprietary OAuth2 securing Kafka channel; PKI, x.509, TLS/SSL",
         "Technologies: Jenkins, Maven, Java 8, JDBC, BASH, PowerShell, Python, Scala, Javascript, Git, Jira, Artifactory",
         "Docker CE and swarm network using RHEL UBI containers, using Kubernetes investigated e.g. OpenShift, AKS"
+      ],
+      "projects": [
+        "Lead operations team",
+        "Product delivery pipline",
+        "Authentication/Authorization"
       ],
       "links" : [
         {

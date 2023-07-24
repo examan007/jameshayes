@@ -357,29 +357,31 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
                 },
                 updateRoles,
                 (index, continent)=> {
+                    function showSummaryElements(summary) {
+                        var ret = ""
+                        function showSummary(index) {
+                            if (index < summary.length) {
+                                if (index < 0) {
+                                    ret = ret + ""<br>""
+                                }
+                                ret = ret + "<p>"
+                                ret = ret + summary[index]
+                                ret = ret + "</p>"
+                               showSummary(index + 1)
+                            }
+                        }
+                        showSummary(0)
+                        return ret;
+                    }
                     if (continent === "AF") {
                         try {
-                            const summary = jsonData.summary
-                            var ret = ""
-                            function showSummary(index) {
-                                if (index < summary.length) {
-                                    if (index < 0) {
-                                        ret = ret + ""<br>""
-                                    }
-                                    ret = ret + "<p>"
-                                    ret = ret + summary[index]
-                                    ret = ret + "</p>"
-                                   showSummary(index + 1)
-                                }
-                            }
-                            showSummary(0)
-                            return ret;
+                            return showSummaryElements(jsonData.summary)
                         } catch (e) {
                             return e.stack.toString()
                         }
                     } else
                     try {
-                        const text = JSON.stringify(jsonData.experience[index].responsibilities[0])
+                        const text = showSummaryElements(jsonData.experience[index].responsibilities)
                         return text
                     } catch (e) {
                         console.log(e.stack.toString())
