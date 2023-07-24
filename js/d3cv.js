@@ -55,7 +55,7 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
             { title: "Role", filter: "Title"  },
             { title: "Project", filter: "Project" },
             { title: "Technology", filter: "Technology" },
-            { title: "", filter: "Search" },
+            { title: "Company", filter: "Company" }
             ]
 
         function mapContinents(static_countinents) {
@@ -140,7 +140,7 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
                         function getObject(object) {
                             if (filter_code === "Company") {
                                 return {
-                                    "CountryName":jsonData.experience[i].company,
+                                    "CountryName":jsonData.experience[i].company.split("(")[0],
                                     "CountryCode":i.toString(),
                                     "ContinentCode": continent_code,
                                     "CenterLongitude": getDegrees(i),
@@ -177,21 +177,39 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
                                     "CenterLatitude": getLatitude(index),
                                     "Population": bias
                                 }
-                            } else {
-                                return {
-                                    "CountryName": "unknown",
-                                    "CountryCode":i.toString(),
-                                    "ContinentCode": continent_code,
-                                    "CenterLongitude":getDegrees(i),
-                                    "CenterLatitude": getLatitude(index),
-                                    "Population": value.toString()
+                            } else
+                            if (filter_code === "Project") {
+                                const projectlist = jsonData.experience[i].projects
+                                function addProject(index) {
+                                    try {
+                                        const project = projectlist[index]
+                                        if (typeof(project) !== 'undefined') {
+                                            newarray.push({
+                                                "CountryName": project,
+                                                "CountryCode":i.toString(),
+                                                "ContinentCode": continent_code,
+                                                "CenterLongitude":getDegrees(i),
+                                                "CenterLatitude": getLatitude(index),
+                                                "Population": value.toString()
+                                            })
+                                            addProject(index +1)
+                                        }
+                                    } catch (e) {
+                                        console.log(e.toString())
+                                    }
                                 }
+                                addProject(0)
+                                return null
+                            } else {
+                                return null
                             }
                         }
                         function createNewObject() {
                             const newobject = getObject()
-                            console.log("newobject=[" + JSON.stringify(newobject) + "]")
-                            newarray.push(newobject)
+                            if (newobject != null) {
+                                console.log("newobject=[" + JSON.stringify(newobject) + "]")
+                                newarray.push(newobject)
+                            }
                         }
                         createNewObject()
                     }

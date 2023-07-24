@@ -36,6 +36,10 @@
         "Application of full stack technology supporting web services including appointment booking using MongoDB, node.js, express.js, Nginx, Docker CE, GitHub Pages, HTML, CSS, and Javascript. JWT with nodemail.js verification.",
         "Utilizing various public CDN resources, open-source components, and a low-cost high availability architecture."
       ],
+      "projects": [
+        "Booking web app",
+        "Interactive resume CV"
+      ],
       "links" : [
         {
           "key": "company",
