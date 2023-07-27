@@ -1,6 +1,6 @@
 d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
     const ThisApp = this
-    var console = {
+    var consolex = {
         log: function(msg) {},
         error: function(msg) {},
     }
@@ -185,7 +185,7 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
                                         const project = projectlist[index]
                                         if (typeof(project) !== 'undefined') {
                                             newarray.push({
-                                                "CountryName": project,
+                                                "CountryName": project.name,
                                                 "CountryCode":i.toString(),
                                                 "ContinentCode": continent_code,
                                                 "CenterLongitude":getDegrees(i),

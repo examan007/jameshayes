@@ -37,9 +37,18 @@
         "Utilizing various public CDN resources, open-source components, and a low-cost high availability architecture."
       ],
       "projects": [
-        "Booking web app",
-        "Interactive resume CV",
-        "Open source"
+        {
+          "name": "Booking web app",
+          "description": ""
+        },
+        {
+          "name": "Interactive resume CV",
+          "description": ""
+        },
+        {
+          "name": "Open source",
+          "description": ""
+        }
       ],
       "links" : [
         {
@@ -73,9 +82,18 @@
         "Docker CE and swarm network using RHEL UBI containers, using Kubernetes investigated e.g. OpenShift, AKS"
       ],
       "projects": [
-        "Lead operations team",
-        "Product delivery pipline",
-        "Authentication/Authorization"
+        {
+          "name": "Lead operations team",
+          "description": ""
+        },
+        {
+          "name": "Product delivery pipline",
+          "description": ""
+        },
+        {
+          "name": "Authentication/Authorization",
+          "description": ""
+        }
       ],
       "links" : [
         {
@@ -90,13 +108,38 @@
       "title": "Devops/Software Developer",
       "dates": "May'18-Feb’22",
       "responsibilities": [
-        "Implemented a continuous automated unattended software delivery system using BASH and Python in a Terraform equivalent approach and using Ansible. Used standard Git workflow in practicing an Agile software change process.",
-        "Designed a packaging framework on AWS enabling delivery of various components in various custom configurations.",
-        "Deliver from the pipeline based on building in a container including escrow image retention and third-party verification.",
+        "Implemented a continuous automated unattended software delivery system using BASH and Python.",
+        "Used standard Git workflow in practicing an Agile software change process feeding into a Terraform/Ansible deploy.",
+        "Designed a package framework enabling delivery of various components in various custom configurations. (Helm like)",
         "Developed and tested REST API with low latency, high concurrency, and scaled performance e.g.150 req/sec",
+        "Delivered as an OEM partner to IBM including source escrow verification and prototyping with UrbanCode Deploy.",
+        "Responsible for product integration with z/OS involving Linux in a z/VM guest using CP from a CMS session.",
         "Integrated hardware cryptography security module using Opencryptoki (C/C++) and z/OS (HSM) as a key vault.",
+        "Delivered Docker containerized product created to run on the z/VM along with an equivalent running on Intel.",
         "Designed automated configuration using AWS/EC2 supporting TLS/SSL for all component communications channels.",
-        "Designed and developed a format-preserving encryption (FPE) module in Scala/Java using open-source libraries."
+        "Designed and developed a format preserving encryption (FPE) module in Scala/Java using open source libraries."
+      ],
+      "projects": [
+        {
+          "name": "Continuous unattended delivery",
+          "decription": ""
+        },
+        {
+          "name": "Package framework",
+          "decription": ""
+        },
+        {
+          "name": "REST API",
+          "decription": ""
+        },
+        {
+          "name": "Hardware cryptography security module",
+          "decription": ""
+        },
+        {
+          "name": "Format preserving encryption",
+          "decription": ""
+        }
       ],
       "links" : [
         {
