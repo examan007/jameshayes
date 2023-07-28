@@ -211,6 +211,7 @@
       "responsibilities": [
         "An upgrade of the Automated Line Control system to a new version running on Redhat Linux with PostgreSQL from HP-UX with Oracle was successfully performed as a contracted member of the systems engineering group providing systems-level support and required program development. Redhat GFS2, 3PAR storage server, and hosted by VMware.",
         "Delivered several critical programs into a near continuous production system including a build and deploy framework supporting bash scripts and C/C++ programs using STL with Subversion.",
+        "Prototyped and tested syslog data sources into a Splunk configuration including reporting and integrated notifications.",
         "Built a web Andon; this is a visualization of the status from the various system components and based on cross-domain JQuery and JSON formatted responses. Governed execution of system scripts is provided to many users by a management program that integrates to Apache and any generic HTTP server as a CGI program providing RESTful API web service. Angular JS was being considered a shop standard."
       ],
       "links" : [
