@@ -34,11 +34,18 @@ h1 {
     font-weight: 900;
 }
 #json-container {
+    width: 90vw;
+    margin: 5vw;
+}
+#profile {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90vw;
-    margin: 5px;
+}
+#education {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 #json-container div {
     margin: 0;

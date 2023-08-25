@@ -15,6 +15,7 @@ var ResumeOutput = function () {
                   const value = data[key]
                    const itemElement = document.createElement('div');
                    if (key === "summary") {
+                      itemElement.setAttribute("id", "summary")
                       itemElement.innerHTML = `
                         <span class="profile-name">${key}</span>
                         <h1>Summary:</h1>
@@ -37,7 +38,8 @@ var ResumeOutput = function () {
                       jsonContainer.appendChild(itemElement);
                   } else
                    if (key === "experience") {
-                      itemElement.innerHTML = `
+                      itemElement.setAttribute("id", "experience")
+                     itemElement.innerHTML = `
                         <span class="profile-name">${key}</span>
                         <h1>Experience:</h1>
                          `
@@ -152,6 +154,7 @@ var ResumeOutput = function () {
                             const obj = data[key]
                             Object.keys(obj).forEach(name => {
                                 const itemExElement = document.createElement('div');
+                                  itemElement.setAttribute("id", "education")
                                   const ivalue = obj[name]
                                   console.log(name + " [" + ivalue + "]")
                                   itemExElement.innerHTML = `
@@ -169,6 +172,7 @@ var ResumeOutput = function () {
                             <span class="profile-name">${key}</span>
                             <a class="profile-value" href="${value.link}">${value.text}</a>
                             `
+                          itemElement.setAttribute("id", "profile")
                           jsonContainer.appendChild(itemElement);
                    } else {
                       itemElement.innerHTML = `
