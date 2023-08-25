@@ -34,6 +34,11 @@ h1 {
     font-weight: 900;
 }
 #json-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90vw;
+    margin: 5px;
 }
 #json-container div {
     margin: 0;
@@ -41,7 +46,6 @@ h1 {
 }
 .profile-value {
     max-width: 100vw;
-    transform: translate(10px, 0px)
 }
 .profile-margin {
 }

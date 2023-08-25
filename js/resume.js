@@ -213,6 +213,7 @@ var ResumeOutput = function () {
         function adjustTextScale(callback) {
             adjustTextScaleBySelector('#json-container div div', callback)
             adjustTextScaleBySelector('h1', callback)
+            adjustTextScaleBySelector('.profile-value', callback)
        }
 
         function registerEvents(element, clickMethod) {
