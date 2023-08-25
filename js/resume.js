@@ -122,7 +122,7 @@ var ResumeOutput = function () {
                                                 const element = getItemValue(elementstr, "responsibilities", index )
                                                 index += 1
                                                 const itemContentElement = document.createElement('span')
-                                                itemContentElement.classList.add('experience-content');
+                                                itemContentElement.classList.add('content-element');
                                                 itemExElement.appendChild(itemContentElement);
                                                 itemContentElement.innerHTML = `
                                                   <span class="profile-name">${name}</span>
@@ -204,12 +204,17 @@ var ResumeOutput = function () {
             const scaledValue = fontSizeValue * scalingFactor;
             element.style.fontSize = scaledValue + "px";
         }
-        function adjustTextScale(callback) {
-            const elementsWithFontSize = document.querySelectorAll('#json-container div');
+        function adjustTextScaleBySelector(selector, callback) {
+            const elementsWithFontSize = document.querySelectorAll(selector);
             elementsWithFontSize.forEach(element => {
                 callback(element)
             });
         }
+        function adjustTextScale(callback) {
+            adjustTextScaleBySelector('#json-container div div', callback)
+            adjustTextScaleBySelector('h1', callback)
+       }
+
         function registerEvents(element, clickMethod) {
             element.addEventListener("click", function(event) {
                  clickMethod(element)
@@ -228,7 +233,7 @@ var ResumeOutput = function () {
             })
         })
         registerEvents(document.getElementById("scale-down-print"), (element)=> {
-            console.log("Up: " + element)
+            console.log("Down: " + element)
             adjustTextScale((element)=> {
                 scaleEm(element, 0.99)
             })
