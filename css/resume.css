@@ -34,8 +34,8 @@ h1 {
     font-weight: 900;
 }
 #json-container {
-    width: 90vw;
-    margin: 5vw;
+    width: 96vw;
+    margin: 2vw;
 }
 #profile {
     display: flex;

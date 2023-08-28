@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>James Hayes</title>
+  <meta name="description" content="This is James Hayes resume of information technology experience.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <meta property="og:title" content="James Hayes">
+  <meta property="og:description" content="This is James Hayes resume of information technology experience.">
+  <meta property="og:image" content="images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="css/resume.css" rel="stylesheet">
+  <link href="css/newwork.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <button id="print-button" class="top-right-button">&nbsp;Download&nbsp;</button>
+  <img id="scale-up-print" class="scale-print" src="icons/up-chevron.png"/>
+  <img id="scale-down-print" class="scale-print" src="icons/down-chevron.png"/>
+  <span id="scale-label">Scale</span>
+</div>
+<div id="profile-template" style="display: none;">
+  <span class="profile-name">${key}</span>
+  <a class="profile-value" href="${value.link}">${value.text}</a>
+</div>
+<div id="summary-template" style="display: none;">
+  <span class="profile-name">${key}</span>
+  <h1>Summary:</h1>
+  <div class="profile-content">
+    <p class="content-value">${value[0]}</p>
+    <p class="content-value">${value[1]}</p>
+    <p class="content-value">${value[2]}</p>
+  </div>
+</div>
+<div id="objective-template" style="display: none;">
+  <span class="profile-name">${key}</span>
+  <h1>Objective:</h1>
+  <div class="profile-content">
+    <p class="content-value">${value}</p>
+  </div>
+</div>
+<div id="experience-template" style="display: none;">
+  <span class="profile-name">${key}</span>
+  <h1>Experience:</h1>
+</div>
+<div id="education-template" style="display: none;">
+  <span class="profile-name">${key}</span>
+  <h1>Education:</h1>
+</div>
+<div id="role-template" style="display: none;">
+  <span class="profile-name">${name}</span>
+  <p class="span-fit" wrap="wrap">${ivalue}</p>
+</div>
+<div id="role-end-template" style="display: none;">
+  <span class="span-right profile-name">${name}</span>
+  <p class="span-fit" wrap="wrap">${ivalue}</p>
+</div>
+<div id="acheivement-template" style="display: none">
+  <span class="profile-name">${name}</span>
+  <span class="content-element">${ivalue}</span>
+</div>
+<div id="json-container">
+</div>
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+<script src="https://neonow.neolation.com/js/login.js"></script>
+<script src="js/scale.js"></script>
+<script src="js/newwork.js"></script>
+<script>
+    ResumeOutput()
+</script>
+
+</body>
+</html>
