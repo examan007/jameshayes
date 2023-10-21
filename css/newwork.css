@@ -1,0 +1,43 @@
+.quadrant {
+}
+
+#wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100vh;
+}
+
+#profile {
+    background-color: #FF5733; /* Adjust the color as needed */
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: 30%;
+}
+
+#summary {
+    background-color: #33FF57; /* Adjust the color as needed */
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+#objective {
+    background-color: #5733FF; /* Adjust the color as needed */
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+#experience {
+    background-color: #33FFFF; /* Adjust the color as needed */
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+

@@ -207,6 +207,24 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
                         function createNewObject() {
                             const newobject = getObject()
                             if (newobject != null) {
+                                try {
+                                    const daterange=newobject.CenterLongitude.split("-")
+                                    function setNewValue() {
+                                        newobject.CenterLongitude = daterange[0] + "-" +
+                                            moment().format("MMM’YY")
+                                    }
+                                    const enddate = daterange[1]
+                                    if (typeof(enddate) == 'undefined') {
+                                        setNewValue()
+                                    } else
+                                    if (enddate.length > 0) {
+                                         console.log("enddate: " + enddate)
+                                    } else {
+                                        setNewValue()
+                                    }
+                                } catch (e) {
+                                    console.log("newobject: " + e.toString())
+                                }
                                 console.log("newobject=[" + JSON.stringify(newobject) + "]")
                                 newarray.push(newobject)
                             }

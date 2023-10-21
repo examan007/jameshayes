@@ -30,7 +30,7 @@
       "company": "LaserStyle.me",
       "location": "Hamilton, ON",
       "title": "Freelance Developer",
-      "dates": "Apr’23-Jul'23",
+      "dates": "Apr’23-",
       "responsibilities": [
         "Design and create an interactive resume CV as a data driven document template using d3.js and SVG elements.",
         "Application of full stack technology supporting web services including appointment booking using MongoDB, node.js, express.js, Nginx, Docker CE, GitHub Pages, HTML, CSS, and Javascript. JWT with nodemail.js verification.",

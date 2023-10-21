@@ -2,7 +2,7 @@ TimelineApplication = function () {
      const MAX_ROLES = 99
      const ThisApp = this
      var updateRole = function (roleid, event) {}
-     var console = {
+     var consolex = {
          log: function(msg) {},
          error: function(msg) {},
      }
@@ -194,22 +194,42 @@ TimelineApplication = function () {
                     if (index < times.length) {
                         try {
                             console.log(JSON.stringify(times[index].dates))
-                            const pair = times[index].dates.split("-")
                             const roleid = times[index].role
                             function getDate(momobj, days) {
                                 const year = momobj.year()
                                 const month = String(momobj.month() + 1).padStart(2, '0')
                                 const day = String(days).padStart(2, '0')
                                 const newdate = "" + year + "-" + month + "-" + day + "T12:00:00Z"
-                                console.log("new date is [" + newdate + "]")
+                                console.log("newdate is [" + newdate + "]")
                                 return (new Date(newdate))
+                            }
+                            function getEndDate() {
+                                try {
+                                    const pair = times[index].dates.split("-")
+                                    function setNewValue() {
+                                        return pair[0] + "-" + moment().format("MMM'YY")
+                                    }
+                                    const enddate = pair[1]
+                                    if (typeof(enddate) == 'undefined') {
+                                        return setNewValue()
+                                    } else
+                                    if (enddate.length > 0) {
+                                         console.log("enddate: " + enddate)
+                                         return enddate
+                                    } else {
+                                        return setNewValue()
+                                    }
+                                } catch (e) {
+                                    console.log("newobject: " + e.toString())
+                                    return setNewValue()
+                                }
                             }
                             const newdate = {
                                 start: getDate(moment(pair[0],"MMM'YY"), 1),
-                                end: getDate(moment(pair[1],"MMM'YY"), 28),
+                                end: getDate(moment(getEndDate(),"MMM'YY"), 28),
                                 role: roleid
                             }
-                            console.log(JSON.stringify(newdate))
+                            console.log("newdate: " + JSON.stringify(newdate))
                             dates.push(newdate)
                         } catch (e) {
                             console.log(e.stack.toString())
