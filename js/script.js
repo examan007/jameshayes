@@ -553,8 +553,8 @@ createBubbleChart = function (getScaling, error, countries, continentNames,
                 if (country.ContinentCode === "AF") {
                     return getDescription(country.CountryCode, country.ContinentCode)
                 } else {
-                    info = [country.CountryName, country.CenterLongitude,
-                    getDescription(country.CountryCode, country.ContinentCode)].join(" ");
+                    info = ["<p>", country.CountryName, country.CenterLongitude,
+                    getDescription(country.CountryCode, country.ContinentCode), "</p"].join(" ");
                     //info = country.CountryName // + ":" + JSON.stringify(getWindowDimensions())
                     return info
                 }

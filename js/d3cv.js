@@ -361,9 +361,6 @@ d3Application = function (ready, updateRoles, updateTime, toggleTimeline) {
                         var ret = ""
                         function showSummary(index) {
                             if (index < summary.length) {
-                                if (index < 0) {
-                                    ret = ret + ""<br>""
-                                }
                                 ret = ret + "<p>"
                                 ret = ret + summary[index]
                                 ret = ret + "</p>"
